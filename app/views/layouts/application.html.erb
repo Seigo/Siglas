@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag 'style' %>
+    
+  </head>
+  <body>
+    <%= flash[:auth_needed] %>
+    
+    <%= yield %>
+  </body>
+</html>

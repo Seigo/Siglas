@@ -1,0 +1,15 @@
+one:
+  name: MyString
+  email: MyString
+  password: MyString
+  country: 1
+  state: 1
+  language: MyString
+
+two:
+  name: MyString
+  email: MyString
+  password: MyString
+  country: 1
+  state: 1
+  language: MyString
