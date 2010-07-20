@@ -1,0 +1,66 @@
+body {
+	/*padding: 2% 2% 2% 2%; do, no space for all content! like #ts*/
+	font-size: large;
+	font-family: "Lucida Grande";
+	margin 3px 0;
+}
+/*
+#container {
+  width: 85%;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+}*/
+
+/* top strip: the above all content, is a row deals with login */
+#ts{
+	font-size: small;
+	/*border-bottom: dashed 1px #eee690;*/
+	
+	-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#FFFFFF none repeat scroll 0 0;
+}
+	#ts_left{
+		
+			
+		padding-top:1px !important;
+		float : left;
+		height:20px;
+		margin-left:8px;
+	}
+	
+	#ts_right{
+		position: relative;
+			
+		text-align:right;
+		/*width: 100%; */
+		padding-top:1px !important;
+		margin-right:8px;
+		padding-bottom:5px !important;
+	}
+	
+	.pillar{
+		top : 24px
+		height:0;
+		position:absolute;
+		top:24px;
+		width:100%;
+		border-top: 1px solid #C9D7F1;
+		font-size: 1px;
+	}
+
+#container{
+	
+}
+	#header{
+		position: relative; left: 0pt; z-index: 2;
+	}
+	
+		.logo{
+			font-size: x-large;
+			font-family: "Times New Roman", Times, serif;
+		}
