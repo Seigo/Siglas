@@ -1,29 +1,3 @@
 <!-- REGISTER PAGE -->
 
-<% form_tag '/register/validate' do %>
-  Name:
-  <%= text_field_tag :name %>
-  <br/>
-  
-  E-mail:
-  <%= text_field_tag :email %>
-  <br/>
-  
-  Country:
-  <%= text_field_tag :country %>
-  <br/> <!-- Country drop down choosing list -->
-
-  State:
-  <%= text_field_tag :state %>
-  <br/> <!-- State drop down choosing list -->
-  
-  Password:
-  <%= password_field_tag :password %>
-  <br/>
-  
-  Confirm password:
-  <%= password_field_tag :password_confirmation %>
-  <br/>
-  
-  <%= submit_tag 'Register' %>
-<% end %>
+<%= render :partial => "/users/form"%>
