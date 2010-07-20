@@ -2,8 +2,29 @@ class RegisterController < ApplicationController
   skip_filter :authenticate
   
   def index
+    @user = User.new
+    
   end
   
-  def validate
+  def register
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "Successfully created user."
+      redirect_to root_url
+    else
+      render :action => 'index'
+    end
   end
+  
+#  def validate                    
+#    if params[:name] && params[:email] && params[:password] && params[:password_confirmation]
+#      if params[:email] =~ /\w+@\w+/ && params[:password] == params[:password_confirmation]
+#        #ok.. save new User
+#        
+#      end
+#    else
+#      flash[]
+#      text << "All wrong!!"
+#    end
+#  end
 end
