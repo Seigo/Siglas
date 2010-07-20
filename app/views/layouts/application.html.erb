@@ -4,6 +4,14 @@
     
   </head>
   <body>
+    <%= link_to('Home', root_url) %>
+    <% if session[:user] %>
+      <%= link_to('Log out', logout_url) %>
+    <% else %>
+      <%= link_to('Log in', login_url)%>
+      <%= link_to('Register', register_url)%>
+    <% end %>
+    
     <%= flash[:auth_needed] %>
     
     <%= yield %>

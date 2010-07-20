@@ -1,15 +1,11 @@
 <!-- LOGIN PAGE -->
 
-<form method="POST" action="/login/authenticate">
-  User name:
-  <input id="username" type="text" /><br/>
-  Password:
-  <input id="password" type="password" /><br/>
-  <input type="submit" value="Login" />
-</form>
+<!--a href="/login/logout">Log out</a-->
 
 <% form_tag '/login/authenticate' do %>
-  <%= text_field_tag :email %>
-  <%= password_field_tag :password %>
-  <%= submit_tag "Log in"%>
+  email:
+  <%= text_field_tag :email %> <br/>
+  password:
+  <%= password_field_tag :password %><br/>
+  <%= submit_tag "Log in" %>
 <% end %>

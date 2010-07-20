@@ -5,10 +5,19 @@ class LoginController < ApplicationController
   end
   
   def authenticate
-    if User.first :condition => ['email=? and password=?', params[:email], params[:password]] do
+    u = User.first(:conditions => ['email=? and password=?', params[:email], params[:password]])
+    if u
       #logado = true 
+      session[:user] = u.to_session_hash
+      render :text => "member account found! =>" + session[:user].to_s
+    else
+      render :text => "member account not found." 
     end
+  end
+  
+  def logout
+    session[:user] = nil
     
-    render :text => "oi"
+    redirect_to root_url
   end
 end

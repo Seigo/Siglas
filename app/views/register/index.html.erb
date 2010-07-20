@@ -1,11 +1,29 @@
 <!-- REGISTER PAGE -->
 
-<form>
-  User name:
-  <input type="text"><br>
+<% form_tag '/register/validate' do %>
+  Name:
+  <%= text_field_tag :name %>
+  <br/>
+  
   E-mail:
-  <input type="text"><br>
+  <%= text_field_tag :email %>
+  <br/>
+  
+  Country:
+  <%= text_field_tag :country %>
+  <br/> <!-- Country drop down choosing list -->
+
+  State:
+  <%= text_field_tag :state %>
+  <br/> <!-- State drop down choosing list -->
+  
   Password:
-  <input type="password"><br>
-  <input type="submit" value="Login">
-</form>
+  <%= password_field_tag :password %>
+  <br/>
+  
+  Confirm password:
+  <%= password_field_tag :password_confirmation %>
+  <br/>
+  
+  <%= submit_tag 'Register' %>
+<% end %>
