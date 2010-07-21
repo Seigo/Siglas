@@ -9,7 +9,8 @@ class RegisterController < ApplicationController
   def register
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "Successfully created user."
+      session[:user] = @user.to_session_hash
+      flash[:notice] = "Thanks for registering! You are now logged in #{session[:user][:name]}."
       redirect_to root_url
     else
       render :action => 'index'

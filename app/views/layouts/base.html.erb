@@ -6,7 +6,8 @@
 		<link rel="stylesheet" href="stylesheets/base.css" type="text/css" /> 
 	</head>
 	<body>
-		
+		<%= flash[:auth_needed] %>
+    <%= flash[:notice] %>
 		
 		<div id="ts">
 			<div id="ts_left">
@@ -17,6 +18,7 @@
 			<div id="ts_right" width="100%">
 				<nobr>
 					 <% if session[:user] %>
+			<%= session[:user][:name] %>
       <%= link_to('LOG OUT', logout_url) %>
     <% else %>
       <%= link_to('LOG IN', login_url)%> | 
