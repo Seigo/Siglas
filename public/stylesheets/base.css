@@ -2,7 +2,12 @@ body {
 	/*padding: 2% 2% 2% 2%; do, no space for all content! like #ts*/
 	font-size: large;
 	font-family: "Lucida Grande";
-	margin 3px 0;
+	margin: 3px 5px 0 5px;
+	letter-spacing: 0.2px;
+}
+
+a:visited{
+	color: #1111CC;
 }
 /*
 #container {
@@ -16,48 +21,54 @@ body {
 
 /* top strip: the above all content, is a row deals with login */
 #ts{
-	font-size: small;
+	font-size: 13px;
 	/*border-bottom: dashed 1px #eee690;*/
-	
+
 	-moz-background-clip:border;
--moz-background-inline-policy:continuous;
--moz-background-origin:padding;
-background:#FFFFFF none repeat scroll 0 0;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#FFFFFF none repeat scroll 0 0;
 }
+	nobr > a, nobr > span > a{
+		cursor: pointer;
+	}
+	
 	#ts_left{
 		
-			
 		padding-top:1px !important;
 		float : left;
 		height:20px;
-		margin-left:8px;
 	}
+		#ts_left > nobr > span{
+			margin-right:0.5em;
+		}
 	
 	#ts_right{
-		position: relative;
-			
 		text-align:right;
-		/*width: 100%; */
+		width: 100%;
 		padding-top:1px !important;
 		margin-right:8px;
-		padding-bottom:5px !important;
+		padding-bottom:3px !important;
 	}
 	
 	.pillar{
 		top : 24px
-		height:0;
-		position:absolute;
-		top:24px;
-		width:100%;
+		height: 0;
+		position: absolute;
+		width: 100%;
 		border-top: 1px solid #C9D7F1;
 		font-size: 1px;
 	}
 
 #container{
-	
+	margin: 0;
+	padding: 17px 0 0 0;
+	clear: both;
 }
 	#header{
-		position: relative; left: 0pt; z-index: 2;
+		position: relative; 
+		left: 0pt; 
+		z-index: 2;
 	}
 	
 		.logo{
