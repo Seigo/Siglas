@@ -6,15 +6,22 @@
 		<link rel="stylesheet" href="stylesheets/base.css" type="text/css" /> 
 	</head>
 	<body>
+		
+		
 		<div id="ts">
 			<div id="ts_left">
 				<nobr>
-					<%= image_tag 'bra_16_11.jpg' %> <%= image_tag 'por_16_11.jpg' %> PORTUGUÊS 
+					<%= image_tag 'bra_16_11.jpg' %> <%= image_tag 'por_16_11.jpg' %> PORTUGUÊS <%= link_to('Home', root_url) %>
 				</nobr>
 			</div>
 			<div id="ts_right" width="100%">
 				<nobr>
-					CRIE SUA CONTA | LOGIN
+					 <% if session[:user] %>
+      <%= link_to('LOG OUT', logout_url) %>
+    <% else %>
+      <%= link_to('LOG IN', login_url)%> | 
+      <%= link_to('REGISTER', register_url)%>
+    <% end %>
 				</nobr>
 			</div>
 			<div style="left: 0pt;" class="pillar"></div>
@@ -25,6 +32,7 @@
 			<div id="header">
 				<span class="logo">LOGO LINDO</span>
 			</div>
+			<%= yield %>
 		</div>
 	</body>
 </html>
