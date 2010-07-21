@@ -1,0 +1,11 @@
+one:
+  id_sigla: 1
+  definition: MyString
+  creator_id: 1
+  language: MyString
+
+two:
+  id_sigla: 1
+  definition: MyString
+  creator_id: 1
+  language: MyString

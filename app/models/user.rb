@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :country, :state, :language, :password_confirmation
   
+  has_many :definitions
+  
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :allow_blank => true
   validates_format_of :name, :with => /^[-\w\._@ ]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
