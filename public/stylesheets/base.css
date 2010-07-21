@@ -65,13 +65,114 @@ a:visited{
 	padding: 17px 0 0 0;
 	clear: both;
 }
-	#header{
-		position: relative; 
-		left: 0pt; 
-		z-index: 2;
+	/* content header banner */
+	#chb{
+		left:0;
+		position:relative;
+		z-index:2;
 	}
-	
-		.logo{
-			font-size: x-large;
-			font-family: "Times New Roman", Times, serif;
+		#logoc{
+			float:left;
+			/*margin-top: -7px;*/
+			padding: 0 18px 0 12px;
 		}
+	
+			.logo{
+				font-size: x-large;
+				font-family: "Times New Roman", Times, serif;
+				margin: 0;
+				padding: 0;
+			}
+			
+		#titlec{
+			padding-bottom:2px;
+			margin-left:188px;
+			margin-right:252px;
+			max-width:711px;
+		}
+			h2{
+				padding : 0;
+				margin: 0;
+				font-size: 3em;
+			}
+		
+		.chb_rigth{
+			color: #AAAAAA;
+			
+			font-size: 11px;
+			height: 32px;
+			position: absolute;
+			right: 0;
+			top: 12px;
+			width: 256px;
+		}
+	
+	#neck{
+		font-size:11px;
+		margin-left:196px;
+		margin-right:252px;
+		max-width:695px;
+		min-height:26px;
+		padding-top:3px;
+		position:relative;
+		z-index:11;
+	}
+		/* neck info */
+		#ni{
+			
+		}
+	
+	#stage{
+		position : relative;
+	}
+		
+		#sc{
+			border-left:1px solid #D3E1F9;
+			clear:both;
+			margin-left:159px;
+			margin-right:264px;
+			padding:0 8px;
+		}
+		
+		#sr{
+			border-left:1px solid #D3E1F9;
+			display:block;
+			position:absolute;
+			right:0;
+			top:0;
+			width:264px;
+			font-size : small;
+		}
+		
+		#sl{
+			padding-left:4px;
+			padding-top:3px;
+			position:absolute;
+			top:0;
+			width:151px;
+		}
+		
+	#footer{
+		margin-left:159px;
+		margin-right:264px;
+		padding:0 8px;
+		max-width:711px;
+	}
+		
+		#fpag{
+			margin-left:159px;
+			margin-right:264px;
+			padding:0 8px;
+			margin-left:168px;
+			margin-right:272px;
+			max-width:711px;
+		}
+		
+		#fabout{
+			margin: 19px auto; 
+			text-align: center;
+		}
+		
+		
+		
+	
