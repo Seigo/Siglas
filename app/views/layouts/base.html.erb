@@ -11,10 +11,10 @@
 		<div id="ts">
 			<div id="ts_left">
 				<nobr>
-					<%= image_tag 'bra_16_11.jpg' %> <%= image_tag 'por_16_11.jpg' %> PORTUGUÊS <%= link_to('Home', root_url) %>
+					<span id="lang"><%= image_tag 'bra_16_11.jpg' %> <%= image_tag 'por_16_11.jpg' %> PORTUGUÊS</span> <span><%= link_to('HOME', root_url) %></span>
 				</nobr>
 			</div>
-			<div id="ts_right" width="100%">
+			<div id="ts_right">
 				<nobr>
 					 <% if session[:user] %>
       <%= link_to('LOG OUT', logout_url) %>
