@@ -10,9 +10,19 @@
 
 <% form_tag '/central/add_definition' do %>
   <% if @sigla %>
-    Adding another definition for SIGLA
+    You can add another definition for SIGLA:<br/>
   <% else %>
-    No definitions existed for SIGLA, creating one
+    No definitions existed for SIGLA, you can create one:<br/>    
   <% end %>
+  
+  <% hidden_field_tag "sigla", params[:sigla] %>
+  
+  Your definition of <%= @title %>:
+  <%= text_field_tag :new_definer %><br/>
+  
+  Language/Idiom of your definition:
+  <%= text_field_tag :definition_language %><br/>
+  
+  <%= submit_tag "Add My Definition!" %>
 <% end %>
 
