@@ -13,6 +13,7 @@ class RegisterController < ApplicationController
       flash[:notice] = "Thanks for registering! You are now logged in #{session[:user][:name]}."
       redirect_to root_url
     else
+      flash[:notice] = "Failed to save account #{@user.to_session_hash[:user]}."
       render :action => 'index'
     end
   end

@@ -1,17 +1,18 @@
 <% form_for @definition do |f| %>
   <%= f.error_messages %>
-  <p>
+  <h2> Definition for <%= f.label @sigla %>: </h2>
+  <!--p>
     <%= f.label :id_sigla %><br />
     <%= f.text_field :id_sigla %>
-  </p>
+  </p-->
   <p>
     <%= f.label :definition %><br />
     <%= f.text_field :definition %>
   </p>
-  <p>
+  <!--p>
     <%= f.label :creator_id %><br />
     <%= f.text_field :creator_id %>
-  </p>
+  </p-->
   <p>
     <%= f.label :language %><br />
     <%= f.text_field :language %>
