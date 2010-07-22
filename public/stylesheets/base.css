@@ -15,6 +15,49 @@ a:visited{
 	color: #1111CC;
 }
 
+
+/* an adaptation from buttons*/
+.round{
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	/*cursor: pointer;*/
+	text-align: center;
+	text-decoration: none;
+	font: 14px/100% Helvetica, sans-serif, "Lucida Grande";
+	padding: 4px 8px 4px 8px;
+	/*text-shadow: 0 1px 1px rgba(0,0,0,.3);*/
+	
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+#response{
+	margin-top: 6px;
+	width: 100%;
+	height: 24px;
+	text-align: center;
+}
+
+.error, .redbg{
+	background-color: #ec3434  !important;
+	color: black;
+}
+.succeed, .greenbg{
+	background-color: #77ec34  !important;
+	color: black;
+}
+
+
+
 /* top strip: the above all content, is a row deals with login */
 #ts{
 	font-size: 13px;

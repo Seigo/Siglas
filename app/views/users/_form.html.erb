@@ -11,7 +11,7 @@
 	<br/>
   <p>
     <%= f.label :country, "País" %><br />
-    <%= f.text_field :country %> <%= field_hint 'País de residência'%>
+    <%= f.select :country, CountryList.read.collect {|p| [ p[1], p[0] ] } %> <%= field_hint 'País de residência'%>
   </p>
   <!--<p>
     <%= f.label :state, "Estado" %><br />
@@ -19,7 +19,7 @@
   </p> -->
   <p>
     <%= f.label :language, "Indioma" %><br />
-    <%= f.text_field :language %> <%= field_hint 'Seu indioma mais usado'%>
+    <%= f.select :language, LanguageList.read.collect {|p| [ p[0], p[1] ] } %> <%= field_hint 'Seu indioma de preferência'%>
   </p>
 	<br/>
   <p>

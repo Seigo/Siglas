@@ -264,7 +264,7 @@ j(f1).each(function(i,e){
               [891,'Yugoslavia (Serbia and Montenegro)','YUG','YU'],
               [894,'ZAMBIA','ZMB','ZM'],
               [716,'ZIMBABWE','ZWE','ZW']]
-  def read()
+  def self.read()
     return @@list
   end
 end
