@@ -1,0 +1,24 @@
+<% title "Definition" %>
+
+<p>
+  <strong>Id Sigla:</strong>
+  <%=h @definition.id_sigla %>
+</p>
+<p>
+  <strong>Definition:</strong>
+  <%=h @definition.definition %>
+</p>
+<p>
+  <strong>Creator:</strong>
+  <%=h @definition.creator_id %>
+</p>
+<p>
+  <strong>Language:</strong>
+  <%=h @definition.language %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_definition_path(@definition) %> |
+  <%= link_to "Destroy", @definition, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", definitions_path %>
+</p>

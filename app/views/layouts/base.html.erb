@@ -6,8 +6,9 @@
 		<link rel="stylesheet" href="stylesheets/base.css" type="text/css" /> 
 	</head>
 	<body>
-		
 		<!-- top strip -->
+		<%= flash[:auth_needed] %>
+    <%= flash[:notice] %>
 		<div id="ts">
 			<div id="ts_left">
 				<nobr>
@@ -17,6 +18,7 @@
 			<div id="ts_right">
 				<nobr>
 					 <% if session[:user] %>
+			<%= session[:user][:name] %>
       <%= link_to('LOG OUT', logout_url) %>
     <% else %>
       <%= link_to('LOG IN', login_url)%> | 
@@ -58,7 +60,11 @@
 			
 			<!-- stage -->
 			<div id="stage">
-				<div id="sc">defs</div>
+				<div id="sc">
+					
+					<%= yield %>
+					
+				</div>
 				<div id="sr">ad</div>
 				<div id="sl">menu</div>
 			</div>
@@ -69,7 +75,6 @@
 			</div>
 			
 			
-			<%= yield %>
 		</div>
 	</body>
 </html>

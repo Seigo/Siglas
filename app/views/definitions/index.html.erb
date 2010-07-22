@@ -1,0 +1,23 @@
+<% title "Definitions" %>
+
+<table>
+  <tr>
+    <th>Id Sigla</th>
+    <th>Definition</th>
+    <th>Creator</th>
+    <th>Language</th>
+  </tr>
+  <% for definition in @definitions %>
+    <tr>
+      <td><%=h definition.id_sigla %></td>
+      <td><%=h definition.definition %></td>
+      <td><%=h definition.creator_id %></td>
+      <td><%=h definition.language %></td>
+      <td><%= link_to "Show", definition %></td>
+      <td><%= link_to "Edit", edit_definition_path(definition) %></td>
+      <td><%= link_to "Destroy", definition, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Definition", new_definition_path %></p>

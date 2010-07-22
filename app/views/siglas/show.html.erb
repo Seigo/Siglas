@@ -1,0 +1,12 @@
+<% title "Sigla" %>
+
+<p>
+  <strong>Sigla:</strong>
+  <%=h @sigla.sigla %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_sigla_path(@sigla) %> |
+  <%= link_to "Destroy", @sigla, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", siglas_path %>
+</p>
