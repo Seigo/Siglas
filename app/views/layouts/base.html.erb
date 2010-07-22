@@ -14,7 +14,7 @@
 			<div id="ts_left">
 				<nobr>
 					<span id="lang"><%= image_tag 'bra_16_11.jpg' %> <%= image_tag 'por_16_11.jpg' %> PORTUGUÊS</span> <span><%= link_to('HOME', root_url) %></span>
-					<% form_tag '/central/search' do %>
+					<% form_tag '/definition' do %>
 					 <%= text_field_tag :sigla %>
 					 <%= submit_tag "Search Sigla" %>
 					<% end %>
