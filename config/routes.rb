@@ -53,4 +53,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
   
   map.root :controller => "central"
+  
+  map.connect '/:action', :controller => 'central'
+  #map.connect '/definition/:sigla', :controller => 'central', :action => 'sigla'
+  
 end
