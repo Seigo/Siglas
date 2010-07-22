@@ -3,7 +3,8 @@ class CentralController < ApplicationController
   skip_filter :authenticate
   
   def index
-    
+    @title = "Open Siglas"
+    @moto = "Acreditamos no poder social!"
   end
   
 =begin
@@ -46,9 +47,10 @@ class CentralController < ApplicationController
     else
       @definitions = nil
     end
-      
-    @ad = "Dark Ads:<br/>Eu vi uma mulher comendo pneu e amamentando um rato!<br/> Click aqui."
-    @pag = "&lt; Goooooooooooooool &gt;"
+    
+    @moto = ( @definitions.size.to_s+" definição" rescue '')
+    @ad = "Dark Ads:<br/>Eu vi uma mulher comendo pneu e amamentando um rato!<br/> <a href='#'>Click aqui.</a>"
+    #@pag = "&lt; Goooooooooooooool &gt;"
   end
   
   def add_definition

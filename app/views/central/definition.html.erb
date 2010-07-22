@@ -1,6 +1,6 @@
 <% if @definitions %>
   <% @definitions.each do |d| %>
-   <%= @title %>
+	 <em><%= d.language.upcase  %></em>
    <%= d.definition %>
    <br/>
   <% end %>
@@ -8,11 +8,14 @@
   There's no definitions for <%= @title %>, you can add yours!
 <% end %>
 
+<br />
+<br />
+
 <% form_tag '/central/add_definition' do %>
   <% if @sigla %>
-    You can add another definition for SIGLA:<br/>
+    You can add another definition for <%= @title %>:<br/>
   <% else %>
-    No definitions existed for SIGLA, you can create one:<br/>    
+    No definitions existed for <%= @title %>, you can create one:<br/>    
   <% end %>
   
   <% hidden_field_tag "sigla", params[:sigla] %>

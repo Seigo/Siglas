@@ -1,7 +1,10 @@
 class LoginController < ApplicationController
+  layout 'base'
   skip_filter :authenticate
   
   def index
+    @title = "Login"
+    @moto = "Olá! "
   end
   
   def authenticate

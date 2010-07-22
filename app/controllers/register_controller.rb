@@ -5,6 +5,7 @@ class RegisterController < ApplicationController
   def index
     @user = User.new
     @title = "Cadastro"
+    @moto = "Seja bem vindo ao time dos Definidores!"
   end
   
   def register

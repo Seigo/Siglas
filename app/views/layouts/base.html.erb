@@ -3,6 +3,7 @@
 	<head>
 		<!-- 
 		#TODO MAximizar: siglas 'acronimos' abreviações
+		REF http://www.abbreviations.com/acronyms
 		-->
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<title>Siglas</title>
@@ -14,10 +15,6 @@
 			<div id="ts_left">
 				<nobr>
 					<span id="lang"><%= image_tag 'bra_16_11.jpg' %> <%= image_tag 'por_16_11.jpg' %> PORTUGUÊS</span> <span><%= link_to('HOME', root_url) %></span>
-					<% form_tag '/definition' do %>
-					 <%= text_field_tag :sigla %>
-					 <%= submit_tag "Search Sigla" %>
-					<% end %>
 				</nobr>
 			</div>
 			<div id="ts_right">
@@ -35,6 +32,7 @@
 			<div style="right: 0pt;" class="pillar"></div>
 		</div>
 		
+		<!-- server: warns, success, auth -->
 		<div id="response">
 			&nbsp;
 			<% if flash[:auth_needed] %>
@@ -75,7 +73,7 @@
 				<div style="float: right;">...</div>
 				<div>
 					<div id="ni">
-						Suppar good!
+						<%= @moto or "#Suppar good!" %>
 					</div>
 				</div>
 			</div>
@@ -87,8 +85,18 @@
 					<%= yield %>
 					
 				</div>
-				<div id="sr"><%= @ad %></div>
-				<div id="sl">menu</div>
+				<!-- need some filling -->
+				<div id="sr"><%= @ad or "<a href='http://www.onemilliongiraffes.com'> <img src='http://www.onemilliongiraffes.com/giraffes/#{rand(60000)}.jpg' width='50%'><br/>Help the world, draw giraffes </a>"  %></div>
+				
+				<!-- menu -->
+				<div id="sl">
+					<% form_tag '/definition' do %>
+						<div id="sb">
+								<%= text_field_tag :sigla %> <button type="submit">Busca</button>
+						</div>
+					<% end %>
+				</div>
+				
 			</div>
 			
 			<div id="footer">
