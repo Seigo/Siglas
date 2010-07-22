@@ -1,3 +1,18 @@
-<% for x in 'a'..'e' %>
-	DEF <%= x %> <br/> <br/>
+<% if @definitions %>
+  <% @definitions.each do |d| %>
+   <%= @title %>
+   <%= d.definition %>
+   <br/>
+  <% end %>
+<% else %>
+  There's no definitions for <%= @title %>, you can add yours!
 <% end %>
+
+<% form_tag '/central/add_definition' do %>
+  <% if @sigla %>
+    Adding another definition for SIGLA
+  <% else %>
+    No definitions existed for SIGLA, creating one
+  <% end %>
+<% end %>
+

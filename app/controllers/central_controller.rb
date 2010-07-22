@@ -6,16 +6,6 @@ class CentralController < ApplicationController
     
   end
   
-  def search
-    @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
-    render :text => "#{@sigla}"
-    
-    #redirect_to root_url
-  end
-  
-  def show_definitions
-    
-  end
 =begin
   def add_definition_for_sigla
     if @sigla == nil
@@ -46,12 +36,23 @@ class CentralController < ApplicationController
 =end
 
   def definition
-    
+    params[:sigla] = params[:sigla].upcase
+    @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
     # seigo code above /'\
-    @title = "FMI"
+    @title = params[:sigla]
+    if @sigla #there are definitions for "sigla"
+      @definitions = Definition.find(:all, :conditions => {:sigla_id => @sigla.id})
+    else
+      @definitions = nil
+    end
+      
     @ad = "Dark Ads:<br/>Eu vi uma mulher comendo pneu e amamentando um rato!<br/> Click aqui."
     @pag = "&lt; Goooooooooooooool &gt;"
+  end
+  
+  def add_definition
+    render :text => "Adding Definition!"
   end
   
 end
