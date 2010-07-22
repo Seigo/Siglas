@@ -52,7 +52,16 @@ class CentralController < ApplicationController
   end
   
   def add_definition
-    render :text => "Adding Definition!"
+    @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
+    
+    if @sigla # Definition(s) exist, create a new
+      @sigla.definitions.create( :definition => params[:new_definer],
+                              :language => params[:definition_language],
+                              :creator_id => session[:user][:id])
+      flash[:notice] = "Another Def successfully created!"
+      redirect_to :action => 'definition', :sigla => params[:sigla]
+    else # No definitions exist, start with a new # need to create a field on Siglas table
+    end
   end
   
 end
