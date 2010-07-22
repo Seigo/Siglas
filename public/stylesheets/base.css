@@ -6,6 +6,11 @@ body {
 	letter-spacing: 0.2px;
 }
 
+.hint{
+	font-size: small;
+	color: #a3a3a3;
+}
+
 a:visited{
 	color: #1111CC;
 }

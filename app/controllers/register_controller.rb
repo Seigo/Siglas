@@ -1,9 +1,10 @@
 class RegisterController < ApplicationController
+  layout 'base'
   skip_filter :authenticate
   
   def index
     @user = User.new
-    
+    @title = "Cadastro"
   end
   
   def register

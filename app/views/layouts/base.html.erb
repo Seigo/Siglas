@@ -44,7 +44,7 @@
 						<h1 class="logo">LOGO LINDO</h1>
 					</div>
 					<div id="titlec">
-						<h2> FMI </h2>
+						<h2> <%= @title %> </h2>
 					</div>
 					
 					<!--%= link_to "Add Definition", :controller => "central", :action => "add_definition_for_sigla", :sigla => @sigla %-->
@@ -72,12 +72,12 @@
 					<%= yield %>
 					
 				</div>
-				<div id="sr">ad</div>
+				<div id="sr"><%= @ad %></div>
 				<div id="sl">menu</div>
 			</div>
 			
 			<div id="footer">
-				<div id="fpag">&lt;<nobr/>Goooooooooooooool<nobr/>&gt;</div>
+				<div id="fpag"><nobr> <%= @pag %> </nobr></div>
 				<div id="fabout"> who are US ?</div>
 			</div>
 			

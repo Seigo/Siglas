@@ -4,4 +4,8 @@ module ApplicationHelper
     
   end
   
+  
+  def field_hint( text )
+    return " <br/><span class='hint'>#{text}</span> "
+  end
 end
