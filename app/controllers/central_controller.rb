@@ -1,6 +1,6 @@
 class CentralController < ApplicationController
   layout 'base'
-  skip_filter :authenticate
+  skip_filter :authenticate, :except => :add_definition
   
   def index
     @title = "Open Siglas"
@@ -48,28 +48,28 @@ class CentralController < ApplicationController
   end
   
   def add_definition
-    if session[:user]  #user is logged
-      @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
-      
-      if @sigla # Definition(s) exist, create a new
-        @sigla.definitions.create( :definition => params[:new_definer],
-                                :language => params[:definition_language],
-                                :creator_id => session[:user][:id])
-        flash[:notice] = "Another definition successfully added for #{@sigla.sigla}"
-        redirect_to :action => 'definition', :sigla => params[:sigla]
-      else # No definitions exist, start with a new # new entry on Siglas table
-        @sigla = Sigla.create(:sigla => params[:sigla])
-        @sigla.definitions.create( :definition => params[:new_definer],
-                                :language => params[:definition_language],
-                                :creator_id => session[:user][:id])
-        flash[:notice] = "Definition successfully created for #{@sigla.sigla}"
-        redirect_to :action => 'definition', :sigla => params[:sigla]
-      end
-      
-    else # user is not logged
-      flash[:notice] = "Please log in to add a definition."
-      redirect_to :action => 'definition', :sigla => params[:sigla]
+    params[:sigla] = params[:sigla].upcase
+    @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
+    
+    if @sigla # Definition(s) exist, create a new
+      @def = @sigla.definitions.new( :definition => params[:new_definer],
+                              :language => params[:definition_language],
+                              :creator_id => session[:user][:id])
+                              
+    else # No definitions exist, start with a new # new entry on Siglas table
+      @sigla = Sigla.create(:sigla => params[:sigla])
+      @def = @sigla.definitions.new( :definition => params[:new_definer],
+                              :language => params[:definition_language],
+                              :creator_id => session[:user][:id])
+
     end
+    
+    if @def.save
+      flash[:notice] = "Another definition successfully added for #{@sigla.sigla}"
+    else
+      flash[:error] = "Error creating definition! Are all fields filled?"
+    end
+    redirect_to :action => 'definition', :sigla => params[:sigla]
   end
   
 end

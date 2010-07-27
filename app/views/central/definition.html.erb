@@ -17,21 +17,22 @@
 <br />
 <br />
 
-<% form_tag '/central/add_definition' do %>
+<% form_tag "/central/add_definition" do %>
   <% if @sigla %>
-    You can add another definition for <%= @title %>:<br/>
+    You can add another definition for <%= @title %>:
   <% else %>
-    No definitions existed for <%= @title %>, you can create one:<br/>    
+    No definitions existed for <%= @title %>, you can create one:    
   <% end %>
+  <br/>
   
   <%= hidden_field_tag "sigla", params[:sigla] %>
   
-  Your definition of <%= @title %>:
-  <%= text_field_tag :new_definer %><br/>
+  Your definition of <%= @title %>:<br />
+  <%= text_field_tag 'new_definer' %><br />
   
-  Language/Idiom of your definition:
-  <%= text_field_tag :definition_language %><br/>
+  Language/Idiom of your definition:<br />
+  <%= select_tag 'definition_language', options_for_select([["", nil]] + LanguageList.read.collect {|p| [ p[0], p[1] ] }) %><br />
   
-  <%= submit_tag "Add My Definition!" %>
+  <%= submit_tag 'Add my definition!' %>
+  
 <% end %>
-
