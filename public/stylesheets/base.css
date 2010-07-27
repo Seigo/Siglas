@@ -24,6 +24,9 @@ img{
 	border: 0;
 }
 
+.hidden{
+	display: none;
+}
 
 /* an adaptation from buttons*/
 .round{
@@ -182,11 +185,17 @@ img{
 			padding: 5px 18px;
 		}
 			dd{
-				/*background-color: #EEEEFF;*/
+				/*background-color: #EEEEFF;
 				margin: 0 0 25px 10px;
 				padding: 0;
 				vertical-align: middle;
 				border-bottom: dotted 1px #9f8ecb;
+				*/
+				background-color:#FFEFC6;
+				border-bottom:1px dotted #9F8ECB;
+				margin:0 0 20px 10px;
+				padding:5px 0 0 5px;
+				vertical-align:middle;
 			}
 			
 				.lang{
@@ -226,12 +235,6 @@ img{
 				margin-left: 15px;
 			}
 			
-			
-			#addf{
-				display: none;
-			}
-			
-		
 		/* Ads or filling*/
 		#sr{
 			border-left:1px solid #D3E1F9;

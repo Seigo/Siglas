@@ -21,14 +21,13 @@
 <br />
 
 <div id="madd">
-	<a href="#add_sigla" onclick="LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$}, '1');">
+	<a href="#add_sigla" onclick="prepare_add(this)"; >
 		<span class="round" style="color: #000000; background-color:#009900;font-size:180%;line-height:80%;vertical-align:middle; ">+</span> Adicionar Definição
-	</a>
+	</a> 
 </div>
-	<a href="#" onclick="alert(j('#madd'))">aaa</a>
 <br />
 <br />
-<div id="addf">
+<div id="addf" class="hidden">
 <% form_tag '/central/add_definition' do %>
   <% if @sigla %>
     You can add another definition for <%= @title %>:<br/>
@@ -44,6 +43,29 @@
   Language/Idiom of your definition:
   <%= text_field_tag :definition_language %><br/>
   
-  <%= submit_tag "Add My Definition!" %>
+	<button type="submit" ><!--%= image_tag 'ajax-loader.gif', :class => "hidden", :name => "hidden" %--> Add My Definition! </button>
 <% end %>
 </div>
+
+<script type="text/javascript">
+	function prepare_add(elem){
+		elem.attributes.onclick.value = ''
+		
+		// TODO está logado?
+		document.getElementById('addf').className= ""
+		
+		
+		/*try{
+		 var hids = document.querySelectorAll('.hidden')
+		}
+		catch(e){
+		 var hids = document.getElementsByName('hidden')
+		}
+		hids[0].className= ""
+		hids[1].className= "" */
+		
+		//LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$; prepare_add_done();}, '1')
+	}
+	
+	//function prepare_add_done(){ }
+</script>
