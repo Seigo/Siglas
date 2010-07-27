@@ -41,27 +41,34 @@ class CentralController < ApplicationController
     @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
     @title = params[:sigla]
-    if @sigla #there are definitions for "sigla"
-      @definitions = Definition.find(:all, :conditions => {:sigla_id => @sigla.id})
-    else
-      @definitions = nil
-    end
     
-    @moto = ( @definitions.size.to_s+" definição" rescue '')
+    @moto = ( @sigla.definitions.size.to_s + " definição(ões)" rescue '')
     @ad = "Dark Ads:<br/>Eu vi uma mulher comendo pneu e amamentando um rato!<br/> <a href='#'>Click aqui.</a>"
     #@pag = "&lt; Goooooooooooooool &gt;"
   end
   
   def add_definition
-    @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
-    
-    if @sigla # Definition(s) exist, create a new
-      @sigla.definitions.create( :definition => params[:new_definer],
-                              :language => params[:definition_language],
-                              :creator_id => session[:user][:id])
-      flash[:notice] = "Another Def successfully created!"
+    if session[:user]  #user is logged
+      @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
+      
+      if @sigla # Definition(s) exist, create a new
+        @sigla.definitions.create( :definition => params[:new_definer],
+                                :language => params[:definition_language],
+                                :creator_id => session[:user][:id])
+        flash[:notice] = "Another definition successfully added for #{@sigla.sigla}"
+        redirect_to :action => 'definition', :sigla => params[:sigla]
+      else # No definitions exist, start with a new # new entry on Siglas table
+        @sigla = Sigla.create(:sigla => params[:sigla])
+        @sigla.definitions.create( :definition => params[:new_definer],
+                                :language => params[:definition_language],
+                                :creator_id => session[:user][:id])
+        flash[:notice] = "Definition successfully created for #{@sigla.sigla}"
+        redirect_to :action => 'definition', :sigla => params[:sigla]
+      end
+      
+    else # user is not logged
+      flash[:notice] = "Please log in to add a definition."
       redirect_to :action => 'definition', :sigla => params[:sigla]
-    else # No definitions exist, start with a new # need to create a field on Siglas table
     end
   end
   

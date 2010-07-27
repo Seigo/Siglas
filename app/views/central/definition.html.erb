@@ -1,6 +1,6 @@
-<% if @definitions %>
+<% if @sigla %>
 <dl>
-  <% @definitions.each do |d| %>
+  <% @sigla.definitions.each do |d| %>
 		<dd>
 			<div>
 				<span class="lang bigrounded"><%=h d.language[0,2].upcase %></span>
@@ -34,7 +34,7 @@
     No definitions existed for <%= @title %>, you can create one:<br/>    
   <% end %>
   
-  <% hidden_field_tag "sigla", params[:sigla] %>
+  <%= hidden_field_tag "sigla", params[:sigla] %>
   
   Your definition of <%= @title %>:
   <%= text_field_tag :new_definer %><br/>
