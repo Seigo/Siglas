@@ -168,14 +168,47 @@ img{
 	#stage{
 		position : relative;
 	}
-		
+		/* content */
 		#sc{
 			border-left:1px solid #D3E1F9;
 			clear:both;
 			margin-left:159px;
 			margin-right:264px;
-			padding:0 8px;
+			padding: 5px 18px;
 		}
+			dd{
+				/*background-color: #EEEEFF;*/
+				margin: 0 0 8px 10px;
+				vertical-align: middle;
+				border-bottom: dotted 1px #9f8ecb;
+			}
+			
+				.lang{
+					display: inline-block;
+					vertical-align: inherit;
+					
+					background-color: #ff6d13;
+					padding: 4px;
+					font-weight:bold;
+					margin: 2px 3px 2px 1px;
+				}
+				
+				.def{
+					display: inline-block;
+					vertical-align: inherit;
+					
+					font-size: 120%;
+				}
+			
+				.creator{
+					display: inline-block;
+					
+					float:right;
+					color:#005577;
+					font-size: 80%;
+					line-height:100%;
+					margin-top:-5px;
+				}
 		
 		/* Ads or filling*/
 		#sr{

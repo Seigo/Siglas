@@ -40,7 +40,6 @@ class CentralController < ApplicationController
     params[:sigla] = params[:sigla].upcase
     @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
-    # seigo code above /'\
     @title = params[:sigla]
     
     @moto = ( @sigla.definitions.size.to_s + " definição(ões)" rescue '')
