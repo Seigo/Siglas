@@ -2,10 +2,13 @@
 <dl>
   <% @definitions.each do |d| %>
 		<dd>
-		 <span class="lang"><%=h d.language[0,2].upcase %></span>
-	   <span class="def"><%=h d.definition %></span> <br />
-		 <span class="creator"><%=h d.user.name rescue "Robot 6000" %></span>
-		 
+			<div>
+				<span class="lang bigrounded"><%=h d.language[0,2].upcase %></span>
+				<span class="def"><%=h d.definition %></span> <br />
+				<div class="creator">
+					<%=h d.user.name rescue "Robot 6000" %>
+				</div>
+		 	</div>
 	   <br/>
 		</dd>
   <% end %>
@@ -14,6 +17,13 @@
   There's no definitions for <%= @title %>, you can add yours!
 <% end %>
 
+<br />
+<br />
+
+<div id="madd">
+	<span class="round" style="background-color:#009900;font-size:180%;line-height:80%;vertical-align:middle; ">+</span> Adicionar Definição
+</div>
+	
 <br />
 <br />
 

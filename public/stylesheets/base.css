@@ -1,18 +1,21 @@
 body {
 	/*padding: 2% 2% 2% 2%; do, no space for all content! like #ts*/
-	font-size: large;
+	font-size: 18px;
 	font-family: "Lucida Grande";
 	margin: 3px 5px 0 5px;
 	letter-spacing: 0.2px;
 }
 
 .hint{
-	font-size: small;
+	font-size: 70%;
 	color: #a3a3a3;
 }
 
 a:visited{
 	color: #1111CC;
+}
+a:hover{
+	text-shadow: 0 0 5px #2299ff;
 }
 
 img{
@@ -64,7 +67,7 @@ img{
 
 /* top strip: the above all content, is a row deals with login */
 #ts{
-	font-size: 13px;
+	font-size: 60%;
 	/*border-bottom: dashed 1px #eee690;*/
 
 	-moz-background-clip:border;
@@ -121,7 +124,7 @@ img{
 		}
 	
 			.logo{
-				font-size: x-large;
+				font-size: 100%;
 				font-family: "Times New Roman", Times, serif;
 				margin: 0;
 				padding: 0;
@@ -136,7 +139,7 @@ img{
 			h2{
 				padding : 0;
 				margin: 0;
-				font-size: 3em;
+				font-size: 350%;
 			}
 		
 		.chb_rigth{
@@ -178,7 +181,8 @@ img{
 		}
 			dd{
 				/*background-color: #EEEEFF;*/
-				margin: 0 0 8px 10px;
+				margin: 0 0 25px 10px;
+				padding: 0;
 				vertical-align: middle;
 				border-bottom: dotted 1px #9f8ecb;
 			}
@@ -188,9 +192,13 @@ img{
 					vertical-align: inherit;
 					
 					background-color: #ff6d13;
-					padding: 4px;
+					padding: 5px;
 					font-weight:bold;
 					margin: 2px 3px 2px 1px;
+					
+					-webkit-border-radius: 2em;
+					-moz-border-radius: 2em;
+					border-radius: 2em;
 				}
 				
 				.def{
@@ -201,14 +209,22 @@ img{
 				}
 			
 				.creator{
-					display: inline-block;
-					
-					float:right;
+					/*float:right;*/
 					color:#005577;
 					font-size: 80%;
-					line-height:100%;
-					margin-top:-5px;
+					line-height:80%;
+					margin-top:0;
+					width: 100%;
+					padding-left: 55px;
+					line-height: 10px;
 				}
+				
+			#madd{
+				font-weight: bold;
+				margin-left: 15px;
+			}
+			
+			
 		
 		/* Ads or filling*/
 		#sr{
