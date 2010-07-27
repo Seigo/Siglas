@@ -6,7 +6,7 @@
 				<span class="lang bigrounded"><%=h d.language[0,2].upcase %></span>
 				<span class="def"><%=h d.definition %></span> <br />
 				<div class="creator">
-					<%=h d.user.name rescue "Robot 6000" %>
+					<%=h d.user.name %>
 				</div>
 		 	</div>
 	   <br/>
@@ -21,12 +21,14 @@
 <br />
 
 <div id="madd">
-	<span class="round" style="background-color:#009900;font-size:180%;line-height:80%;vertical-align:middle; ">+</span> Adicionar Definição
+	<a href="#add_sigla" onclick="LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$}, '1');">
+		<span class="round" style="color: #000000; background-color:#009900;font-size:180%;line-height:80%;vertical-align:middle; ">+</span> Adicionar Definição
+	</a>
 </div>
-	
+	<a href="#" onclick="alert(j('#madd'))">aaa</a>
 <br />
 <br />
-
+<div id="addf">
 <% form_tag '/central/add_definition' do %>
   <% if @sigla %>
     You can add another definition for <%= @title %>:<br/>
@@ -44,4 +46,4 @@
   
   <%= submit_tag "Add My Definition!" %>
 <% end %>
-
+</div>

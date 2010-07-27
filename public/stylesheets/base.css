@@ -11,11 +11,13 @@ body {
 	color: #a3a3a3;
 }
 
-a:visited{
-	color: #1111CC;
+a, a:visited{
+	color: #1111cc;
+	text-decoration:none;
 }
 a:hover{
 	text-shadow: 0 0 5px #2299ff;
+	text-decoration:none;
 }
 
 img{
@@ -145,7 +147,7 @@ img{
 		.chb_rigth{
 			color: #AAAAAA;
 			
-			font-size: 11px;
+			font-size: 60%;
 			height: 32px;
 			position: absolute;
 			right: 0;
@@ -154,7 +156,7 @@ img{
 		}
 	
 	#neck{
-		font-size:11px;
+		font-size:60%;
 		margin-left:196px;
 		margin-right:252px;
 		max-width:695px;
@@ -225,6 +227,10 @@ img{
 			}
 			
 			
+			#addf{
+				display: none;
+			}
+			
 		
 		/* Ads or filling*/
 		#sr{
@@ -234,7 +240,7 @@ img{
 			right:0;
 			top:0;
 			width:264px;
-			font-size : small;
+			font-size : 70%;
 			text-align: center;
 		}
 		
