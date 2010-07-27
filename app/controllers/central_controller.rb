@@ -40,7 +40,6 @@ class CentralController < ApplicationController
     params[:sigla] = params[:sigla].upcase
     @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
-    # seigo code above /'\
     @title = params[:sigla]
     if @sigla #there are definitions for "sigla"
       @definitions = Definition.find(:all, :conditions => {:sigla_id => @sigla.id})

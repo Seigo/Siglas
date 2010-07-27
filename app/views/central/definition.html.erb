@@ -1,9 +1,15 @@
 <% if @definitions %>
+<dl>
   <% @definitions.each do |d| %>
-	 <em><%= d.language.upcase  %></em>
-   <%= d.definition %>
-   <br/>
+		<dd>
+		 <span class="lang"><%=h d.language[0,2].upcase %></span>
+	   <span class="def"><%=h d.definition %></span> <br />
+		 <span class="creator"><%=h d.user.name rescue "Robot 6000" %></span>
+		 
+	   <br/>
+		</dd>
   <% end %>
+</dl>
 <% else %>
   There's no definitions for <%= @title %>, you can add yours!
 <% end %>
