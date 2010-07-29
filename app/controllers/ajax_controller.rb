@@ -1,25 +1,37 @@
 class AjaxController < ApplicationController
   
   def up
-    @up = @sigla.definitions.ups.new(:definition_id => params[:definition_id],
-                                  :user_id => params[:user_id])
+    @def = Definition.find(:first, :conditions => {:id => params[:definition_id]})
+    
+    if @def
+      @up = @def.ups.new(:definition_id => params[:definition_id],
+                      :user_id => session[:user][:id])
 
-    if @up.save
-      flash[:notice] = "You have successfully voted up"
+      if @up.save
+        render :text => "UP vote succesfully saved!", :status => 200
+      else
+        render :text => "UP couldn't be saved!", :status => 403
+      end
     else
-      flash[:error] = "Error voting definition up"
+      render :text => "Definition is nil!", :status => 403
     end
   end
   
   def flag
-    @flag = @sigla.definitions.flags.new(:definition_id => params[:definition_id],
-                                  :user_id => params[:user_id],
-                                  :obs => params[:obs])
-                                  
-    if @up.save
-      flash[:notice] = "You have successfully flagged a definition"
+    @def = Definition.find(:first, :conditions => {:id => params[:definition_id]})
+    
+    if @def
+      @flag = @def.flags.new(:definition_id => params[:definition_id],
+                      :user_id => session[:user][:id],
+                      :obs => params[:obs])
+
+      if @flag.save
+        render :text => "FLAG succesfully saved!", :status => 200
+      else
+        render :text => "FLAG couldn't be saved!", :status => 403
+      end
     else
-      flash[:error] = "Error flagging definition"
-    end                             
+      render :text => "Definition is nil!", :status => 403
+    end
   end
 end
