@@ -4,6 +4,9 @@ class Definition < ActiveRecord::Base
   belongs_to :sigla # foreign key - sigla_id
   belongs_to :user, :foreign_key => :creator_id # foreign key - creator_id
   
+  has_many :ups
+  has_many :flags
+  
   validates_presence_of :sigla_id
   validates_presence_of :definition
   validates_presence_of :creator_id

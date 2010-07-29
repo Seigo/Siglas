@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :ups
+
+  map.resources :flags
+
   map.resources :definitions
 
   map.resources :siglas

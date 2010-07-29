@@ -1,0 +1,21 @@
+<% title "Flags" %>
+
+<table>
+  <tr>
+    <th>Definition</th>
+    <th>User</th>
+    <th>Obs</th>
+  </tr>
+  <% for flag in @flags %>
+    <tr>
+      <td><%=h flag.definition_id %></td>
+      <td><%=h flag.user_id %></td>
+      <td><%=h flag.obs %></td>
+      <td><%= link_to "Show", flag %></td>
+      <td><%= link_to "Edit", edit_flag_path(flag) %></td>
+      <td><%= link_to "Destroy", flag, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Flag", new_flag_path %></p>

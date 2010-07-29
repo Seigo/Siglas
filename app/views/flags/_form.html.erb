@@ -1,0 +1,16 @@
+<% form_for @flag do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :definition_id %><br />
+    <%= f.text_field :definition_id %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :obs %><br />
+    <%= f.text_field :obs %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

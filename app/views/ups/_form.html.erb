@@ -1,0 +1,12 @@
+<% form_for @up do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :definition_id %><br />
+    <%= f.text_field :definition_id %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

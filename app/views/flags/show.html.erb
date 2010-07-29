@@ -1,0 +1,20 @@
+<% title "Flag" %>
+
+<p>
+  <strong>Definition:</strong>
+  <%=h @flag.definition_id %>
+</p>
+<p>
+  <strong>User:</strong>
+  <%=h @flag.user_id %>
+</p>
+<p>
+  <strong>Obs:</strong>
+  <%=h @flag.obs %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_flag_path(@flag) %> |
+  <%= link_to "Destroy", @flag, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", flags_path %>
+</p>

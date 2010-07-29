@@ -1,0 +1,19 @@
+<% title "Ups" %>
+
+<table>
+  <tr>
+    <th>Definition</th>
+    <th>User</th>
+  </tr>
+  <% for up in @ups %>
+    <tr>
+      <td><%=h up.definition_id %></td>
+      <td><%=h up.user_id %></td>
+      <td><%= link_to "Show", up %></td>
+      <td><%= link_to "Edit", edit_up_path(up) %></td>
+      <td><%= link_to "Destroy", up, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Up", new_up_path %></p>
