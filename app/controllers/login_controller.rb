@@ -2,9 +2,18 @@ class LoginController < ApplicationController
   layout 'base'
   skip_filter :authenticate
   
-  def index
+  before_filter :already_logged, :except => :logout
+  
+  def index    
     @title = "Login"
     @moto = "Olá! "
+  end
+  
+  def already_logged
+    if session[:user]
+      flash[:notice] = "You are already logged in!"
+      redirect_to root_url
+    end
   end
   
   def authenticate
