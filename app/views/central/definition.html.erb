@@ -17,35 +17,45 @@
   There's no definitions for <%= @title %>, you can add yours!
 <% end %>
 
-<br />
-<br />
-
 <div id="madd">
 	<a href="#add_sigla" onclick="prepare_add(this)"; >
 		<span class="round" style="color: #000000; background-color:#009900;font-size:180%;line-height:80%;vertical-align:middle; ">+</span> Adicionar Definição
-	</a> 
+	</a> <%= image_tag 'ajax-loader.gif', :class => "hidden", :name => "madd-spinner" %> 
 </div>
-<br />
-<br />
+
 <div id="addf" class="hidden">
 <% form_tag '/central/add_definition' do %>
 
+<!--
   <% if @sigla %>
     You can add another definition for <%= @title %>:
   <% else %>
     No definitions existed for <%= @title %>, you can create one:    
   <% end %>
-  <br/>
-  
+-->
   <%= hidden_field_tag "sigla", params[:sigla] %>
-  
+	<p>
+    <%= label_tag :new_definer, "Definição:" %><br />
+    <%= text_field_tag 'new_definer' %>
+  </p>
+	<p>
+    <%= label_tag :definition_language, "Indioma:" %><br />
+    <%= select_tag 'definition_language', options_for_select([["", nil]] + LanguageList.read.collect {|p| [ p[0], p[1] ] }) %>
+  </p>
+	<button type="submit" > Ok! </button>
+	
+	<div style="font-style: italic; font-size: 75%; line-height: 150%">
+  	<sup>1</sup>Faca definições coesas e precisas<br />
+		<sup>2</sup>As definições devem ser mínimas<br />
+		<sup>3</sup>Exemplo:  FMI - Fundo Monetário Internacional, Português
+  </div>
+	<!--
   Your definition of <%= @title %>:<br />
   <%= text_field_tag 'new_definer' %><br />
   
   Language/Idiom of your definition:<br />
   <%= select_tag 'definition_language', options_for_select([["", nil]] + LanguageList.read.collect {|p| [ p[0], p[1] ] }) %><br />
-  
-	<button type="submit" ><!--%= image_tag 'ajax-loader.gif', :class => "hidden", :name => "hidden" %--> Add My Definition! </button>
+  -->
 <% end %>
 </div>
 
@@ -53,9 +63,21 @@
 	function prepare_add(elem){
 		elem.attributes.onclick.value = ''
 		
-		// TODO está logado?
-		document.getElementById('addf').className= ""
+		LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$; prepare_add_done();}, '1')
 		
+		var spinner = document.getElementsByName('madd-spinner')
+		//debugger
+		try {
+			spinner.classList.remove('hidden')
+		}catch(e){ 	
+			spinner.className= "" 
+		}
+		
+		// TODO está logado?
+	//document.getElementById('addf')
+		//document.getElementById('addf').className= ""
+		
+	//elem.classList.add('hidden')
 		
 		/*try{
 		 var hids = document.querySelectorAll('.hidden')
@@ -65,9 +87,9 @@
 		}
 		hids[0].className= ""
 		hids[1].className= "" */
-		
-		//LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$; prepare_add_done();}, '1')
 	}
 	
-	//function prepare_add_done(){ }
+	function prepare_add_done(){
+		j('#madd').slideUp( '', function(){ j('#addf').slideDown( '', function(){ j('html,body').animate({ scrollTop: $('#footer').offset().top }) } ) })
+	}
 </script>

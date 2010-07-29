@@ -1,10 +1,21 @@
+<style type="text/css">
+	.link{
+		display: inline-block;
+		margin-right: 10px;
+	}
+	
+	
+</style>
 
-|<br />
-|<br />
-|<br />
-|<br />
-|<br />
-|<br />
-|<br />
-|<br />
- -----------> Search HERE
+<h3>Novas Siglas definidas</h3>
+<% @new_siglas.each do |sigla| %>
+	 <div class="link"> <%= link_to sigla.sigla, url_def( sigla.sigla)  %> </div>
+<% end %>
+
+<br />
+<br />
+
+<!-- h3>Novas definições</h3>
+< @pop_defs.each do |d| % >
+	 <= d.sigla.sigla+" - "+d.definition % > <br />
+< end %-->

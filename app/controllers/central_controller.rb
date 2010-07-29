@@ -3,6 +3,9 @@ class CentralController < ApplicationController
   skip_filter :authenticate, :except => :add_definition
   
   def index
+    @new_siglas = Sigla.all :order => "created_at DESC", :limit => 10
+    #@pop_defs = Definition.all :order => "created_at DESC"
+    
     @title = "Open Siglas"
     @moto = "Acreditamos no poder social!"
   end

@@ -8,4 +8,14 @@ module ApplicationHelper
   def field_hint( text )
     return " <br/><span class='hint'>#{text}</span> "
   end
+  
+  
+  def right_filling()
+    return "<a href='http://www.onemilliongiraffes.com'> <img src='http://www.onemilliongiraffes.com/giraffes/#{rand(60000)}.jpg' width='50%'><br/>Help the world, draw giraffes </a>" + ("<br/>"*20)
+  end
+  
+  def url_def( str )
+    #TODO pegar a lingua do user para montar URL na lingua
+    "/definicao/#{str}"
+  end
 end

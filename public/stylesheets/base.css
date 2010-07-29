@@ -4,11 +4,13 @@ body {
 	font-family: "Lucida Grande";
 	margin: 3px 5px 0 5px;
 	letter-spacing: 0.2px;
+	min-width: 750px;
 }
 
 .hint{
 	font-size: 70%;
 	color: #a3a3a3;
+	margin-left: 2px;
 }
 
 a, a:visited{
@@ -27,6 +29,17 @@ img{
 .hidden{
 	display: none;
 }
+
+form > p{
+	display: inline-block;
+	width:280px;
+}
+
+form > p > select, form > p > input{
+	width : 265px
+}
+
+
 
 /* an adaptation from buttons*/
 .round{
@@ -181,7 +194,7 @@ img{
 			border-left:1px solid #D3E1F9;
 			clear:both;
 			margin-left:159px;
-			margin-right:264px;
+			margin-right:164px;
 			padding: 5px 18px;
 		}
 			dd{
@@ -233,6 +246,16 @@ img{
 			#madd{
 				font-weight: bold;
 				margin-left: 15px;
+				margin-top: 20px;
+			}
+			
+			/* Form verde de adicionar Def. */
+			#addf{
+				background-color:#AE8;
+				margin:20px 20px 5px 25px;
+				padding:10px;
+				text-align:left;
+				border-bottom:1px dotted #9F8ECB;
 			}
 			
 		/* Ads or filling*/
@@ -242,7 +265,7 @@ img{
 			position:absolute;
 			right:0;
 			top:0;
-			width:264px;
+			width:164px;
 			font-size : 70%;
 			text-align: center;
 		}
