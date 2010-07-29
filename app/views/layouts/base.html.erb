@@ -8,7 +8,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<title>Siglas</title>
 		<link rel="stylesheet" href="/stylesheets/base.css" type="text/css" />
-		<%= javascript_include_tag 'lazyload-1.0.4-min.js' %> 
+		<%= javascript_include_tag 'lazyload-1.0.4-min.js' %>
+		<script type="text/javascript">
+			var user_id = false;
+			<%= "user_id = #{session[:user][:id]}" if session[:user] %> 
+		</script>
 	</head>
 	<body>
 		<!-- top strip -->
@@ -36,15 +40,10 @@
 		<!-- server: warns, success, auth -->
 		<div id="response">
 			&nbsp;
-			<% if flash[:auth_needed] %>
-				<div class="round error">  <%= flash[:auth_needed] %> </div>
-			<% end %>
-			<% if flash[:notice] %>
-	    	<div class="round succeed">  <%= flash[:notice] %> </div>
-			<% end %>
-			<% if flash[:error] %>
-				<div class="round error">  <%= flash[:error] %> </div>
-			<% end %>
+			<% hide = "style='display:none'"%>
+				<div class="round error"   <%= hide unless flash[:auth_needed] %> >  <%= flash[:auth_needed] %> </div>
+	    	<div class="round succeed" <%= hide unless flash[:notice] %> >  <%= flash[:notice] %> </div>
+				<div class="round error"   <%= hide unless flash[:error] %> >  <%= flash[:error] %> </div>
 			&nbsp;
 		</div>
 		
@@ -64,14 +63,14 @@
 					<!--%= link_to "Add Definition", :controller => "central", :action => "add_definition_for_sigla", :sigla => @sigla %-->
 					
 					<div class="chb_rigth">
-						pebles...
+						.
 					</div>
 				</div>
 			</div>
 			
 			<!-- neck -->
 			<div id="neck">
-				<div style="float: right;">...</div>
+				<div style="float: right;">.</div>
 				<div>
 					<div id="ni">
 						<%= @moto or "#Suppar good!" %>

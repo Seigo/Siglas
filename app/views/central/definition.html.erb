@@ -2,9 +2,14 @@
 <dl>
   <% @sigla.definitions.each do |d| %>
 		<dd>
-			<div>
-				<span class="lang bigrounded"><%=h d.language[0,2].upcase %></span>
-				<span class="def"><%=h d.definition %></span> <br />
+			<div id="def<%= d.id %>">
+				<div class="definitionb">
+					<span> <span class="lang bigrounded"><%=h d.language[0,2].upcase %></span> <span class="def"><%=h d.definition %></span> </span>
+				</div>
+				<div class="feedbackb">
+					<%= image_tag 'uhand.png', :title => "Exatamente o que eu queria saber!",  :onclick => "up_request(#{d.id})" %> 
+					<%= image_tag 'dhand.png', :title => "Essa definição é inapropriada..",    :onclick => "flag_request(#{d.id})" %>  
+				</div>
 				<div class="creator">
 					<%=h d.user.name %>
 				</div>
@@ -23,16 +28,10 @@
 	</a> <%= image_tag 'ajax-loader.gif', :class => "hidden", :name => "madd-spinner" %> 
 </div>
 
+															<!-- Green Form of Definition add -->
 <div id="addf" class="hidden">
 <% form_tag '/central/add_definition' do %>
 
-<!--
-  <% if @sigla %>
-    You can add another definition for <%= @title %>:
-  <% else %>
-    No definitions existed for <%= @title %>, you can create one:    
-  <% end %>
--->
   <%= hidden_field_tag "sigla", params[:sigla] %>
 	<p>
     <%= label_tag :new_definer, "Definição:" %><br />
@@ -49,21 +48,47 @@
 		<sup>2</sup>As definições devem ser mínimas<br />
 		<sup>3</sup>Exemplo:  FMI - Fundo Monetário Internacional, Português
   </div>
-	<!--
-  Your definition of <%= @title %>:<br />
-  <%= text_field_tag 'new_definer' %><br />
-  
-  Language/Idiom of your definition:<br />
-  <%= select_tag 'definition_language', options_for_select([["", nil]] + LanguageList.read.collect {|p| [ p[0], p[1] ] }) %><br />
-  -->
 <% end %>
 </div>
 
 <script type="text/javascript">
+	
+	function up_request( id ){
+		//TODO spin
+		//FIXME bad pratice, could be done by getMyJQuery 
+		up = id
+		getMyJQuery( up_request_callback )
+	}
+	function up_request_callback( id ){
+		j.ajax({
+					url: '/ajax/up',
+					data:{definition_id:up}, // FIXME ugly parameter reference
+					success: function(data) {
+						  alert('Vote succeed!');
+						},
+					error: function(a,b,c){
+							alert('flaw')
+						}
+					})
+	}
+	
+	
+	function flag_request( id ){
+		//TODO spin
+		getMyJQuery( flag_request_callback )
+	}
+	function flag_request_callback( id){
+		
+	}
+	
+	
+	
 	function prepare_add(elem){
+		// TODO está logado?
+		
 		elem.attributes.onclick.value = ''
 		
-		LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$; prepare_add_done();}, '1')
+		getMyJQuery( prepare_add_done )
 		
 		var spinner = document.getElementsByName('madd-spinner')
 		//debugger
@@ -73,23 +98,18 @@
 			spinner.className= "" 
 		}
 		
-		// TODO está logado?
-	//document.getElementById('addf')
-		//document.getElementById('addf').className= ""
-		
-	//elem.classList.add('hidden')
-		
-		/*try{
-		 var hids = document.querySelectorAll('.hidden')
-		}
-		catch(e){
-		 var hids = document.getElementsByName('hidden')
-		}
-		hids[0].className= ""
-		hids[1].className= "" */
 	}
 	
 	function prepare_add_done(){
 		j('#madd').slideUp( '', function(){ j('#addf').slideDown( '', function(){ j('html,body').animate({ scrollTop: $('#footer').offset().top }) } ) })
+	}
+	
+	function getMyJQuery( callback ){
+		// This means jQuery is loaded
+		if( typeof($) == 'function' ){
+			callback.call(1)
+		}else{
+			LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$; callback.call();}, true)
+		}
 	}
 </script>

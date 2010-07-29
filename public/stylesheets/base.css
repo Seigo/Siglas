@@ -211,27 +211,43 @@ form > p > select, form > p > input{
 				vertical-align:middle;
 			}
 			
-				.lang{
+				.definitionb{
 					display: inline-block;
-					vertical-align: inherit;
+					width: 80%
+				}
 					
-					background-color: #ff6d13;
-					padding: 5px;
-					font-weight:bold;
-					margin: 2px 3px 2px 1px;
+					.lang{
+						display: inline-block;
+						vertical-align: inherit;
+						
+						background-color: #ff6d13;
+						padding: 5px;
+						font-weight:bold;
+						margin: 2px 3px 2px 1px;
+						
+						-webkit-border-radius: 2em;
+						-moz-border-radius: 2em;
+						border-radius: 2em;
+					}
 					
-					-webkit-border-radius: 2em;
-					-moz-border-radius: 2em;
-					border-radius: 2em;
+					.def{
+						display: inline-block;
+						vertical-align: inherit;
+						
+						font-size: 120%;
+					}
+				
+				.feedbackb{
+					display: inline-block;
+					text-align: right;
+					width: 18%;
 				}
 				
-				.def{
-					display: inline-block;
-					vertical-align: inherit;
-					
-					font-size: 120%;
-				}
-			
+				.feedbackb > img{
+					cursor: pointer;
+				} 
+				
+				
 				.creator{
 					/*float:right;*/
 					color:#005577;
