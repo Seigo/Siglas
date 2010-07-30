@@ -6,7 +6,7 @@
 		REF http://www.abbreviations.com/acronyms
 		-->
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		<title>Siglas</title>
+		<title><%=@title%> - </title>
 		<link rel="stylesheet" href="/stylesheets/base.css" type="text/css" />
 		<%= javascript_include_tag 'lazyload-1.0.4-min.js' %>
 		<script type="text/javascript">
@@ -25,11 +25,11 @@
 			<div id="ts_right">
 				<nobr>
           <% if session[:user] %>
-            <%= session[:user][:name] %>
+						<strong><%= link_to session[:user][:name], url_user( session[:user][:id], session[:user][:name]) %></strong> | 
             <%= link_to('LOG OUT', logout_url) %>
           <% else %>
             <%= link_to('LOG IN', login_url)%> | 
-            <%= link_to('REGISTER', register_url)%>
+            <%= link_to('CADASTRO', register_url)%>
           <% end %>
 				</nobr>
 			</div>

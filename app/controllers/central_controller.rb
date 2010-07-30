@@ -53,6 +53,10 @@ class CentralController < ApplicationController
   def profile
     @user = User.find params[:id]
     @siglas = []
+    @user.definitions.each{ |d| @siglas.push(d.sigla) }
+    @siglas.uniq!
+    
+    
     
     @title = @user.name
     @moto = "Usuário desde #{ @user.created_at.to_date.to_s_br }"

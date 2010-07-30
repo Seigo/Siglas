@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :country, :state, :language, :password_confirmation
   
   has_many :definitions, :foreign_key => 'creator_id'
+  has_many :flags
+  has_many :ups
   
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :allow_blank => true

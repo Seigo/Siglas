@@ -1,9 +1,18 @@
-<div>
-	<h1>Contribuições:</h1>
-	<div>
-		<h3>Definições:</h3>
-		<% @user.definitions.each do |d| %>
-			
+<div style="margin-left: 5px">
+	<h3 style="margin-left: 0px;" >Definições:</h3>
+	<div style="margin-left: 0px; border-left:1px solid #D3E1F9; padding-left: -12px; margin-top:-25px;">
+		<ul style="list-style:circle">
+		<% @siglas.each do |sigla| %>
+			 <li><%= link_to sigla.sigla, url_def( sigla.sigla) %></li>
 		<% end %>
+		</ul>
 	</div>
+	
+	<h3 style="margin-left: 0px;" >Votos:</h3>
+	<div style="border-left:1px solid #D3E1F9;margin-left:0;margin-top:-25px;padding-left:20px;">
+		<%= image_tag 'uhand.png', :class => 'selected' %> <%= @user.ups.count %> <br />
+		<%= image_tag 'dhand.png', :class => 'selected' %> <%= @user.flags.count %> <br />
+	</div>
+	
+	
 </div>

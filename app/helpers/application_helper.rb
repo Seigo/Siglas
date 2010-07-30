@@ -18,4 +18,9 @@ module ApplicationHelper
     #TODO pegar a lingua do user para montar URL na lingua
     "/definicao/#{str}"
   end
+  
+  def url_user( id, name )
+    "/perfil/#{id}/#{ CGI.escape(name.gsub(' ','_')) }"
+  end
+    
 end
