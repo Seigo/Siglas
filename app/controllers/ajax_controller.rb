@@ -1,11 +1,16 @@
 class AjaxController < ApplicationController
+  skip_filter :authenticate, :except => :flag
   
   def up
+    flash[:notice] = "remote_ip: #{request.remote_ip} fim"
+    #logger.info(request.env.inspect)
+    
     @def = Definition.find(:first, :conditions => {:id => params[:definition_id]})
     
     if @def
       @up = @def.ups.new(:definition_id => params[:definition_id],
-                      :user_id => session[:user][:id])
+                      :user_id => session[:user] ? session[:user][:id] : 0,
+                      :user_ip => request.remote_ip)
 
       if @up.save
         render :text => "UP vote succesfully saved!", :status => 200
