@@ -3,7 +3,7 @@ class CreateFlags < ActiveRecord::Migration
     create_table :flags do |t|
       t.integer :definition_id, :null => false
       t.integer :user_id, :null => false
-      t.string :obs, :limit => 250
+      t.string :obs, :null => false, :limit => 250
       t.timestamps
     end
   end
