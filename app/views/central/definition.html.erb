@@ -38,7 +38,7 @@
     <%= text_field_tag 'new_definer' %>
   </p>
 	<p>
-    <%= label_tag :definition_language, "Indioma:" %><br />
+    <%= label_tag :definition_language, "Idioma:" %><br />
     <%= select_tag 'definition_language', options_for_select([["", nil]] + LanguageList.read.collect {|p| [ p[0], p[1] ] }) %>
   </p>
 	<button type="submit" > Ok! </button>

@@ -2,7 +2,7 @@ class AjaxController < ApplicationController
   skip_filter :authenticate, :except => :flag
   
   def up
-    flash[:notice] = "remote_ip: #{request.remote_ip} fim"
+    #flash[:notice] = "remote_ip: #{request.remote_ip} fim"
     #logger.info(request.env.inspect)
     
     @def = Definition.find(:first, :conditions => {:id => params[:definition_id]})
