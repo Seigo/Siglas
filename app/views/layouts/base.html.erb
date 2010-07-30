@@ -91,7 +91,7 @@
 				
 				<!-- menu -->
 				<div id="sl">
-					<% form_tag '/definition' do %>
+					<% form_tag '/definition', :method => 'GET' do %>
 						<div id="sb">
 								<%= text_field_tag :sigla %> <button type="submit">Busca</button>
 						</div>
