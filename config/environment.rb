@@ -76,3 +76,9 @@ end
 
 require 'country_list.rb'
 require 'language_list.rb'
+
+class Date
+  def to_s_br
+    self.strftime('%d/%m/%Y')
+  end
+end

@@ -39,6 +39,15 @@ form > p > select, form > p > input{
 	width : 265px
 }
 
+h1{
+	font-size: 200% 
+}
+
+h3{
+	font-size: 150%
+}
+
+
 /* an adaptation from buttons*/
 .round{
 	display: inline;
@@ -160,7 +169,7 @@ form > p > select, form > p > input{
 			h2{
 				padding : 0;
 				margin: 0;
-				font-size: 350%;
+				font-size: 300%;
 			}
 		
 		.chb_rigth{

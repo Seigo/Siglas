@@ -50,4 +50,12 @@ class CentralController < ApplicationController
     redirect_to :action => 'definition', :sigla => params[:sigla]
   end
   
+  def profile
+    @user = User.find params[:id]
+    @siglas = []
+    
+    @title = @user.name
+    @moto = "Usuário desde #{ @user.created_at.to_date.to_s_br }"
+  end
+  
 end
