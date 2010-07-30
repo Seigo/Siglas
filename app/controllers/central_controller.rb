@@ -6,9 +6,9 @@ class CentralController < ApplicationController
     @new_siglas = Sigla.all( :order => "created_at DESC", :limit => 10 )
     
     @title = "Open Siglas"
-    @moto = "Acreditamos no poder social!"
+    @moto = "Acreditamos no poder da Web Social!"
   end
-
+  
   def definition # "Busca"
     if params[:sigla] == ""
       flash[:notice] = "Search parameter is blank."
@@ -19,7 +19,7 @@ class CentralController < ApplicationController
       
       @title = params[:sigla]
       
-      @moto = ( @sigla.definitions.size.to_s + " definição(ões)" rescue '')
+      @moto = ( @template.pluralize(@sigla.definitions.size, 'resultados' )  )
       @ad = "Dark Ads:<br/>Eu vi uma mulher comendo pneu e amamentando um rato!<br/> <a href='#'>Click aqui.</a>"
       #@pag = "&lt; Goooooooooooooool &gt;"
     end

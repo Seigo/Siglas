@@ -57,6 +57,7 @@
 	spinner.name = "madd-spinner"
 	spinner.src = "/images/ajax-loader.gif"
 	
+	
 	//			* DEF FEEDBACK *
 	
 	
@@ -85,34 +86,40 @@
 	}
 	
 	
-	function flag_request( id ){
-		// TODO
+	function flag_request( id, node ){
+		flag = id
+		load_and_run( up_request_callback )
+		try{ j(spinner).show() } catch(e){}
+		node.parentNode.appendChild( spinner )
+		
 		load_and_run( flag_request_callback )
 	}
 	function flag_request_callback( id){
-		// TODO
+		
 	}
 	
 	
 	//			* ADD DEF *
 	
+	
 	function prepare_add(elem){
-		// TODO está logado?
-		
 		elem.attributes.onclick.value = ''
-		
 		load_and_run( prepare_add_done )
-		
-		var spinner = document.getElementsByName('madd-spinner')
-		//debugger
-		try {
-			spinner.classList.remove('hidden')
-		}catch(e){ 	
-			spinner.className= "" 
-		}
+		try{ j(spinner).show() } catch(e){}
+		elem.parentNode.appendChild( spinner )
 	}
+	// FIXME Do primeiro click em diante ele buga e não aparece nada 
 	function prepare_add_done(){
-		j('#madd').slideUp( '', function(){ j('#addf').slideDown( '', function(){ j('html,body').animate({ scrollTop: $('#footer').offset().top }) } ) })
+		if( user_id ){
+			j('#madd').slideUp( '', function(){ 
+							j('#addf').slideDown( '', function(){
+										j('html,body').animate({
+											 		scrollTop: $('#footer').offset().top }) } ) })
+		}else{
+			flash_notice( "Ops.. você não está logado ou seu passe expirou, por favor faça Login ↗" )
+			j('html,body').animate({ scrollTop: 0 })
+		}
+		j('[name="madd-spinner"]').hide()
 	}
 	
 	
