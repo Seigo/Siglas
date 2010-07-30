@@ -12,7 +12,6 @@ var spinner = new Image();
 		load_and_run( up_request_callback )
 		try{ j(spinner).show() } catch(e){}
 		node.parentNode.appendChild( spinner )
-		//document.getElementById('sc').parentNode.appendChild(spinner)
 	}
 	function up_request_callback( id ){
 		j.ajax({
@@ -23,9 +22,11 @@ var spinner = new Image();
 							j('[name="madd-spinner"]').hide()
 						  flash_notice('Obrigado por Votar');
 							j('#def'+up+'>.feedbackb>.up').addClass('selected')
+							j('[name="madd-spinner"]').hide()
 						},
 					error: function(a,b,c){
-							flash_notice('Vote Negado -- Muitos votos seguidos podem ser ignorados');
+							flash_notice('Ops.. Voto Repetido ou Muitos votos seguidos');
+							j('[name="madd-spinner"]').hide()
 						}
 					})
 	}
@@ -33,14 +34,38 @@ var spinner = new Image();
 	
 	function flag_request( id, node ){
 		flag = id
-		load_and_run( up_request_callback )
+		load_and_run( flag_request_callback )
 		try{ j(spinner).show() } catch(e){}
 		node.parentNode.appendChild( spinner )
-		
-		load_and_run( flag_request_callback )
 	}
 	function flag_request_callback( id){
-		
+		if (user_id) {
+			var obs = prompt('Por favor um breve comentário sobre o motivo da sinalização (spam, erro, ..)') 
+			if(obs){
+				j.ajax({
+					url: '/ajax/flag',
+					data: {
+						definition_id: flag,
+						obs: obs
+					}, // FIXME ugly parameter reference
+					success: function(data){
+						j('[name="madd-spinner"]').hide()
+						flash_notice('Obrigado por Votar');
+						j('#def' + flag + '>.feedbackb>.report').addClass('selected')
+						j('[name="madd-spinner"]').hide()
+					},
+					error: function(a, b, c){
+						flash_notice('Ops.. Voto Repetido ou Muitos votos seguidos');
+						j('[name="madd-spinner"]').hide()
+					}
+				})
+			}
+		}
+		else {
+			flash_notice( "Ops.. você não está logado ou seu passe expirou, por favor faça Login ↗" )
+			j('html,body').animate({ scrollTop: 0 })
+		}
+		setTimeout( "j('[name=\"madd-spinner\"]').hide()", 300)
 	}
 	
 	
