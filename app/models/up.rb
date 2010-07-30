@@ -6,4 +6,6 @@ class Up < ActiveRecord::Base
   
   validates_presence_of :definition_id
   validates_presence_of :user_id
+  
+  validates_uniqueness_of :definition_id, :scope => :user_id  # user can't vote twice on the same def
 end
