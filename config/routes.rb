@@ -50,6 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing the them or commenting them out if you're using named routes and resources.
   
   map.definition '/definition/:sigla', :controller => 'central', :action => 'definition'
+  map.definition '/definicao/:sigla', :controller => 'central', :action => 'definition'
   
   map.login '/login', :controller => 'login', :action => 'index'
   map.logout '/logout', :controller => 'login', :action => 'logout'
