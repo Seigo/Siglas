@@ -40,10 +40,10 @@
 		<!-- server: warns, success, auth -->
 		<div id="response">
 			&nbsp;
-			<% hide = "style='display:none'"%>
-				<div class="round error"   <%= hide unless flash[:auth_needed] %> >  <%= flash[:auth_needed] %> </div>
-	    	<div class="round succeed" <%= hide unless flash[:notice] %> >  <%= flash[:notice] %> </div>
-				<div class="round error"   <%= hide unless flash[:error] %> >  <%= flash[:error] %> </div>
+				<% hide = "style='display:none'"%>
+				<div class="round error"   id="authb"  <%= hide unless flash[:auth_needed] %> >  <%= flash[:auth_needed] %> </div>
+	    	<div class="round succeed" id="notib" <%= hide unless flash[:notice] %> >  <%= flash[:notice] %> </div>
+				<div class="round error"   id="errob"<%= hide unless flash[:error] %> >  <%= flash[:error] %> </div>
 			&nbsp;
 		</div>
 		

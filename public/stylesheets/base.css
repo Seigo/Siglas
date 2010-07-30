@@ -39,11 +39,9 @@ form > p > select, form > p > input{
 	width : 265px
 }
 
-
-
 /* an adaptation from buttons*/
 .round{
-	display: inline-block;
+	display: inline;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
 	vertical-align: baseline;
@@ -71,15 +69,20 @@ form > p > select, form > p > input{
 	height: 24px;
 	text-align: center;
 }
-
-.error, .redbg{
-	background-color: #ec3434  !important;
-	color: black;
-}
-.succeed, .greenbg{
-	background-color: #77ec34  !important;
-	color: black;
-}
+	#authb, #notib, #errob{
+		display: inline-block;
+	}
+	
+	.error, .redbg{
+		background-color: #ec3434  !important;
+		color: black;
+		width: auto;
+	}
+	.succeed, .greenbg{
+		background-color: #77ec34  !important;
+		color: black;
+		width: auto;
+	}
 
 
 
@@ -240,12 +243,21 @@ form > p > select, form > p > input{
 				.feedbackb{
 					display: inline-block;
 					text-align: right;
+					vertical-align: middle;
 					width: 18%;
 				}
+					.selected{
+						border: 3px solid #3333CC;
+						
+						-webkit-border-radius: 0.3em; 
+						-moz-border-radius: 0.3em;
+						border-radius: 0.3em;
+					}
 				
-				.feedbackb > img{
-					cursor: pointer;
-				} 
+					.feedbackb > img{
+						cursor: pointer;
+						vertical-align: middle;
+					} 
 				
 				
 				.creator{

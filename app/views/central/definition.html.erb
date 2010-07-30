@@ -7,8 +7,8 @@
 					<span> <span class="lang bigrounded"><%=h d.language[0,2].upcase %></span> <span class="def"><%=h d.definition %></span> </span>
 				</div>
 				<div class="feedbackb">
-					<%= image_tag 'uhand.png', :title => "Exatamente o que eu queria saber!",  :onclick => "up_request(#{d.id})" %> 
-					<%= image_tag 'dhand.png', :title => "Essa definição é inapropriada..",    :onclick => "flag_request(#{d.id})" %>  
+					<%= image_tag 'uhand.png', :class => 'up',     :title => "Exatamente o que eu queria saber!",  :onclick => "up_request(#{d.id}, this)" %> 
+					<%= image_tag 'dhand.png', :class => 'report', :title => "Essa definição é inapropriada..",    :onclick => "flag_request(#{d.id}, this)" %>  
 				</div>
 				<div class="creator">
 					<%=h d.user.name %>
@@ -53,42 +53,55 @@
 
 <script type="text/javascript">
 	
-	function up_request( id ){
-		//TODO spin
-		//FIXME bad pratice, could be done by getMyJQuery 
+	var spinner = new Image();
+	spinner.name = "madd-spinner"
+	spinner.src = "/images/ajax-loader.gif"
+	
+	//			* DEF FEEDBACK *
+	
+	
+	function up_request( id, node ){
+		//FIXME bad pratice, could be done by getMyJQuery?
 		up = id
-		getMyJQuery( up_request_callback )
+		load_and_run( up_request_callback )
+		try{ j(spinner).show() } catch(e){}
+		node.parentNode.appendChild( spinner )
+		//document.getElementById('sc').parentNode.appendChild(spinner)
 	}
 	function up_request_callback( id ){
 		j.ajax({
 					url: '/ajax/up',
 					data:{definition_id:up}, // FIXME ugly parameter reference
+					
 					success: function(data) {
-						  alert('Vote succeed!');
+							j('[name="madd-spinner"]').hide()
+						  flash_notice('Obrigado por Votar');
+							j('#def'+up+'>.feedbackb>.up').addClass('selected')
 						},
 					error: function(a,b,c){
-							alert('flaw')
+							flash_notice('Vote Negado -- Muitos votos seguidos podem ser ignorados');
 						}
 					})
 	}
 	
 	
 	function flag_request( id ){
-		//TODO spin
-		getMyJQuery( flag_request_callback )
+		// TODO
+		load_and_run( flag_request_callback )
 	}
 	function flag_request_callback( id){
-		
+		// TODO
 	}
 	
 	
+	//			* ADD DEF *
 	
 	function prepare_add(elem){
 		// TODO está logado?
 		
 		elem.attributes.onclick.value = ''
 		
-		getMyJQuery( prepare_add_done )
+		load_and_run( prepare_add_done )
 		
 		var spinner = document.getElementsByName('madd-spinner')
 		//debugger
@@ -97,19 +110,38 @@
 		}catch(e){ 	
 			spinner.className= "" 
 		}
-		
 	}
-	
 	function prepare_add_done(){
 		j('#madd').slideUp( '', function(){ j('#addf').slideDown( '', function(){ j('html,body').animate({ scrollTop: $('#footer').offset().top }) } ) })
 	}
 	
-	function getMyJQuery( callback ){
-		// This means jQuery is loaded
+	
+	
+	//			* VISUAL *
+	
+	function flash_notice( msg ){
+		//Assumes jQuery is present
+		j('#notib').html( msg ).fadeIn()
+		setTimeout( "j('#notib').fadeOut()", 5000 )
+	}
+	
+	function flash_error( msg ){
+		//Assumes jQuery is present
+		j('#errob').html( msg ).fadeIn()
+		setTimeout( "j('#errob').fadeOut()", 5000 )
+	}
+	
+	
+	
+	//			* BASE *
+	 
+	function load_and_run( callback, arg ){
 		if( typeof($) == 'function' ){
-			callback.call(1)
+			// This means jQuery is loaded
+			callback( (typeof( arg ) != 'undefined' ? arg : true))
 		}else{
-			LazyLoad.load('/javascripts/jquery-1.4.2.js', function(){j=$; callback.call();}, true)
+			LazyLoad.load('/javascripts/jquery-1.4.2.js', function(arg){ j=$; callback( (typeof( arg ) != 'undefined' ? arg : true) )}, arg)
 		}
 	}
 </script>
+<!--% flash[:notice] = "thiwas" %-->
