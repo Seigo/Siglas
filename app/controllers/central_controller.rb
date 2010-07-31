@@ -11,7 +11,7 @@ class CentralController < ApplicationController
   
   def definition # "Busca"
     if params[:sigla] == ""
-      flash[:notice] = "Search parameter is blank."
+      #flash[:notice] = "Campo de busca vazio."
       redirect_to root_url
     else
       params[:sigla] = params[:sigla].upcase
@@ -46,9 +46,9 @@ class CentralController < ApplicationController
     end
     
     if @def.save
-      flash[:notice] = "Another definition successfully added for #{@sigla.sigla}"
+      flash[:notice] = "Sucesso! Definição adicionada para #{@sigla.sigla}"
     else
-      flash[:error] = "Error creating definition! Are all fields filled?"
+      flash[:error] = "Erro! Todos os campos foram preenchidos?"
     end
     redirect_to :action => 'definition', :sigla => params[:sigla]
   end
