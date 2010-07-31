@@ -3,10 +3,10 @@ class CentralController < ApplicationController
   skip_filter :authenticate, :except => :add_definition
   
   def index
-    @new_siglas = Sigla.all( :order => "created_at DESC", :limit => 10 )
+    @new_siglas = Sigla.all( :order => "created_at DESC", :limit => 100 )
     
-    @title = "Open Siglas"
-    @moto = "Acreditamos no poder da Web Social!"
+    @title = "GASA"
+    @moto = "Glosário de Abreviaturas Siglas e Acrônimos"
   end
   
   def definition # "Busca"
@@ -18,8 +18,11 @@ class CentralController < ApplicationController
       @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
       
       @title = params[:sigla]
-      
-      @moto = ( @template.pluralize(@sigla.definitions.size, 'resultados' )  )
+      if( @sigla )
+        @moto = ( @template.pluralize(@sigla.definitions.size, 'resultados' )  )
+      else
+        @moto = " Trevas :("
+      end
       @ad = "Dark Ads:<br/>Eu vi uma mulher comendo pneu e amamentando um rato!<br/> <a href='#'>Click aqui.</a>"
       #@pag = "&lt; Goooooooooooooool &gt;"
     end
