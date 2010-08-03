@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :country, :state, :language, :password_confirmation
   
-  has_many :definitions, :foreign_key => 'creator_id'
+  has_many :definitions, :foreign_key => 'creator_id', :dependent => :nullify
   has_many :flags
   has_many :ups
   

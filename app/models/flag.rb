@@ -9,4 +9,9 @@ class Flag < ActiveRecord::Base
   validates_presence_of :obs
   
   validates_uniqueness_of :definition_id, :scope => :user_id  # user can't vote twice on the same def
+ 
+  def get_definition
+    Definition.find(:first, :conditions => {:id => self.definition_id}).definition
+  end
+
 end

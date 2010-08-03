@@ -1,8 +1,12 @@
 <% title "Flag" %>
 
 <p>
-  <strong>Definition:</strong>
+  <strong>Definition id:</strong>
   <%=h @flag.definition_id %>
+</p>
+<p>
+  <strong>Definition:</strong>
+  <%=h @flag.get_definition %>
 </p>
 <p>
   <strong>User:</strong>
