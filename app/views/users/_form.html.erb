@@ -18,8 +18,8 @@
     <%= f.text_field :state %>
   </p> -->
   <p>
-    <%= f.label :language, "Indioma" %><br />
-    <%= f.select :language, LanguageList.read.collect {|p| [ p[0], p[1] ] } %> <%= field_hint 'Seu indioma de preferência'%>
+    <%= f.label :language, "Idioma" %><br />
+    <%= f.select :language, LanguageList.read.collect {|p| [ p[0], p[1] ] } %> <%= field_hint 'Seu idioma de preferência'%>
   </p>
 	<br/>
   <p>

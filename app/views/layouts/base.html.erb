@@ -8,10 +8,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<title><%=@title%> - GASA - Glossário de Abreviaturas Siglas e Acrônimos</title>
 		<link rel="stylesheet" href="/stylesheets/base.css" type="text/css" />
-		<%= javascript_include_tag 'lazyload-1.0.4-min.js' %>
+		<%= javascript_include_tag 'lazyload-2.0-min.js' %><!-- http://wonko.com/post/lazyload-200-released -->
+		
 		<script type="text/javascript">
 			var user_id = false;
-			<%= "user_id = #{session[:user][:id]}" if session[:user] %> 
+			<%= "user_id = #{session[:user][:id]}" if session[:user] %>
 		</script>
 		
 		<script type="text/javascript">
