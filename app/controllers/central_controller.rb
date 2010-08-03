@@ -1,6 +1,6 @@
 class CentralController < ApplicationController
   layout 'base'
-  skip_filter :authenticate, :except => [:add_definition, :profile, :edit_profile]
+  skip_filter :authenticate, :except => [:add_definition, :profile, :edit_profile, :delete_profile]
   
   def index
     @new_siglas = Sigla.all( :order => "created_at DESC", :limit => 100 )
@@ -54,7 +54,7 @@ class CentralController < ApplicationController
   end
   
   def profile
-    @user = User.find params[:id]
+    @user = User.find session[:user][:id]
     @siglas = []
     @user.definitions.each{ |d| @siglas.push(d.sigla) }
     @siglas.uniq!
@@ -66,9 +66,7 @@ class CentralController < ApplicationController
   end
   
   def edit_profile
-    @u = params[:user]
-    @user = User.find @u[:id]
-    #@user = User.find(:first, :conditions => {:id => params[:user].id})
+    @user = User.find session[:user][:id]
     
     if @user
       @user.name = @u[:name]
@@ -91,4 +89,17 @@ class CentralController < ApplicationController
     redirect_to :action => 'profile', :id => @user.id
   end
   
+  def delete_profile
+    @user = User.find session[:user][:id]
+    
+    if @user.destroy
+      flash[:notice] = "User account destroyed!"
+    else
+      flash[:error] = "Could not destroy user account!"
+    end
+    
+    session[:user] = nil
+    
+    redirect_to root_url
+  end
 end

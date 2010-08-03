@@ -15,7 +15,6 @@
   <div style="margin-left: 0px; border-left:1px solid #D3E1F9; padding-left: -12px; margin-top:-25px;">
     <% form_for @user, :url => { :controller => 'central', :action => 'edit_profile' } do |f| %>
       <%= f.error_messages %>
-      <%= f.hidden_field('id') %>
       <p>
         <%= f.label :name, "Nome" %><br />
         <%= f.text_field :name %> <%= field_hint 'ex: Fabiano P Soriani'%>
@@ -67,5 +66,13 @@
       <%= user_flags.obs %> <br />
     <% end %>
 	</div>
+	
+	<h3 style="margin-left: 0px;" >Apagar conta:</h3>
+	<div style="border-left:1px solid #D3E1F9;margin-left:0;margin-top:-25px;padding-left:20px;">
+        
+    <% form_tag '/central/delete_profile' do %>
+        <button type="submit" >APAGAR</button>
+    <% end %>
+  </div>
 
 </div>
