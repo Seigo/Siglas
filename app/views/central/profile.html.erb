@@ -12,6 +12,11 @@
 	<div style="border-left:1px solid #D3E1F9;margin-left:0;margin-top:-25px;padding-left:20px;">
 		<%= image_tag 'uhand.png', :class => 'selected' %> <%= @user.ups.count %> <br />
 		<%= image_tag 'dhand.png', :class => 'selected' %> <%= @user.flags.count %> <br />
+		<% @this_user_flags = Flag.find(:all, :conditions => {:user_id => @user.id}) %>
+		<% @this_user_flags.each do |user_flags| %>
+		<%= user_flags.get_definition %> <br />
+		<%= user_flags.obs %> <br />
+		<% end %>
 	</div>
 	
 	
