@@ -7,7 +7,8 @@
 					<span> <span class="lang bigrounded"><%=h d.language[0,2].upcase %></span> <span class="def"><%=h d.definition %></span> </span>
 				</div>
 				<div class="feedbackb">
-					<%= image_tag 'uhand.png', :class => 'up',     :title => "Exatamente o que eu queria saber!",  :onclick => "up_request(#{d.id}, this)" %> 
+					<%= image_tag 'uhand.png', :class => 'up',     :title => "Exatamente o que eu queria saber!",  :onclick => "up_request(#{d.id}, this)" %>
+					<%= d.ups.count %>
 					<%= image_tag 'dhand.png', :class => 'report', :title => "Essa definição é inapropriada..",    :onclick => "flag_request(#{d.id}, this)" %>  
 				</div>
 				<div class="creator">
