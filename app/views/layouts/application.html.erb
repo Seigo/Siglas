@@ -1,20 +1,44 @@
 <html>
   <head>
     <%= stylesheet_link_tag 'style' %>
-    
+    <title> <%= controller.controller_name.capitalize %> :: GASA</title>
   </head>
   <body>
-    <%= link_to('Home', root_url) %>
-    <% if session[:user] %>
-      <%= link_to('Log out', logout_url) %>
-    <% else %>
-      <%= link_to('Log in', login_url)%>
-      <%= link_to('Register', register_url)%>
-    <% end %>
+  	
+	<div id="masternav">
+		  <span class="item autolink">
+		  	<%= link_to('HOME', root_url) %> 
+			</span> |
+			<span class="item autolink"> Users </span> |   
+			<span class="item autolink"> Siglas </span> | 
+			<span class="item autolink"> Flags </span> | 
+			<span class="item autolink"> Ups </span> || 
+			<span class="item"> 
+				<%= link_to('Log out', logout_url) %>
+			</span>
+	</div>
+	<script type="text/javascript">
+		// Turns the autolinks from the |masternav| into real links
+		var itens = document.getElementById("masternav").children
+		for (var i=0; i<itens.length; i++) {
+			if(itens[i].getAttribute('class').match( /autolink/ )){
+				var content = itens[i].innerHTML.replace(" ", "")
+				itens[i].innerHTML = "<a href='/" + content.toLowerCase() + "'> "+content+" </a> "
+			}
+		};
+	</script>
+	
+    <div id="container">
+      <% flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <% end -%>
+      
+      <!--% if show_title? -% >
+        <h1>< %=h yield(:title) % ></h1>
+      < % end -->
+      
+      <%= yield %>
+    </div>
     
-    <%= flash[:auth_needed] %>
-    <%= flash[:notice] %>
-    
-    <%= yield %>
   </body>
 </html>
