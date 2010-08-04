@@ -17,6 +17,8 @@ class CentralController < ApplicationController
       params[:sigla] = params[:sigla].upcase
       @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
       
+      @sigla.definitions.sort! {|x,y| y.ups.count <=> x.ups.count }
+      
       @title = params[:sigla]
       if( @sigla )
         @moto = ( @template.pluralize(@sigla.definitions.size, 'resultados' )  )
@@ -32,18 +34,11 @@ class CentralController < ApplicationController
     params[:sigla] = params[:sigla].upcase
     @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
-    if @sigla # Definition(s) exist, create a new
-      @def = @sigla.definitions.new( :definition => params[:new_definer],
+    @sigla = Sigla.create(:sigla => params[:sigla]) unless @sigla
+    
+    @def = @sigla.definitions.new( :definition => params[:new_definer],
                               :language => params[:definition_language],
                               :creator_id => session[:user][:id])
-                              
-    else # No definitions exist, start with a new # new entry on Siglas table
-      @sigla = Sigla.create(:sigla => params[:sigla])
-      @def = @sigla.definitions.new( :definition => params[:new_definer],
-                              :language => params[:definition_language],
-                              :creator_id => session[:user][:id])
-
-    end
     
     if @def.save
       flash[:notice] = "Sucesso! Definição adicionada para #{@sigla.sigla}"

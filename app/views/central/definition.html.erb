@@ -12,7 +12,7 @@
 					<%= image_tag 'flag.png', :class => 'report', :title => "Essa definição é inapropriada..",    :onclick => "flag_request(#{d.id}, this)" %>  
 				</div>
 				<div class="creator">
-					<%= link_to d.user.name, url_user( d.user.id, d.user.name) %>
+					<%= link_to( d.user.name, url_user( d.user.id, d.user.name)) rescue 'Conta removida' %>
 				</div>
 		 	</div>
 	   <br/>
