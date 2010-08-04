@@ -18,6 +18,6 @@ class User < ActiveRecord::Base
   
   
   def to_session_hash
-    {:id => self.id, :name => self.name, :language => self.language}
+    {:id => self.id, :name => self.name, :email => self.email, :language => self.language}
   end
 end
