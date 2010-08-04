@@ -1,6 +1,7 @@
 class RegisterController < ApplicationController
   layout 'base'
   skip_filter :authenticate
+  skip_filter :authenticate_admin
   
   def index
     @user = User.new
