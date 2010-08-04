@@ -7,8 +7,8 @@
 					<span> <span class="lang bigrounded"><%=h d.language[0,2].upcase %></span> <span class="def"><%=h d.definition %></span> </span>
 				</div>
 				<div class="feedbackb">
-					<%= image_tag 'uhand.png', :class => 'up',     :title => "Exatamente o que eu queria saber!",  :onclick => "up_request(#{d.id}, this)" %> 
-					<%= d.ups.count %>
+					
+					<span class="count"><%= d.ups.count %></span> <%= image_tag 'uhand.png', :class => 'up',     :title => "Exatamente o que eu queria saber!",  :onclick => "up_request(#{d.id}, this)" %> |  
 					<%= image_tag 'flag.png', :class => 'report', :title => "Essa definição é inapropriada..",    :onclick => "flag_request(#{d.id}, this)" %>  
 				</div>
 				<div class="creator">
@@ -49,15 +49,16 @@
 	<div style="font-style: italic; font-size: 75%; line-height: 150%">
   	<sup>1</sup>Faca definições coesas e precisas<br />
 		<sup>2</sup>As definições devem ser mínimas<br />
-		<sup>3</sup>Exemplo:  FMI - Fundo Monetário Internacional, Português
+		<sup>3</sup>Exemplo:  FMI - Fundo Monetário Internacional
   </div>
 <% end %>
 </div>
 
 <div id="flagmsg" style="display:none">
-	<h3 style="text-align:center;"> Definição Inapropriada?! </h3>
-	<p> Informa sobre qual categoria você a considera errada:</p>
-	<p>
+	<p style="float:right; margin: -25px -5px 0 0" > <input style="text-align: left; margin-left: 20px; margin-top: 20px" type="button" onclick="j.closeDOMWindow();" value="Cancelar [X]" /> </p>
+	<p style="font-size:140%; font-weight: bold;"> Definição Inapropriada? </p>
+	<p class="defflag" style="background-color:#FFEFC6; border-bottom:1px dotted #9F8ECB; font-size: 80%">  </p>
+	<p style="font-size: 90%">
 		<input type="radio" name="motivo" class="pre" value="spam" checked="checked" /> Propaganda <br />
 		<input type="radio" name="motivo" class="pre" value="typo" /> Erro de Digitação <br />
 		<input type="radio" name="motivo" class="pre" value="lang" /> Idioma Errado <br />
@@ -65,182 +66,8 @@
 		<input type="radio" name="motivo" class="custom" value="lang" /> Outro: <input type="text" name="other" /> <br />
 	</p>
 	<p>
-		<input type="button" onclick="j.closeDOMWindow();" value="Cancelar [X]" /> | <input type="button" value="Ok" onclick="send_flag_proxy(this);"/> 
+	 <input style="float: right; margin-right: 40px" type="button" value="Ok" onclick="send_flag_proxy(this);"/> 
 	</p>
 </div>
-
-<script type="text/javascript">
-	
-	var spinner = new Image();
-	spinner.name = "madd-spinner"
-	spinner.src = "/images/ajax-loader.gif"
-	
-	
-	//			* DEF FEEDBACK *
-	
-	
-	function up_request( id, node ){
-		//FIXME bad pratice, could be done by getMyJQuery?
-		up = id
-		load_and_run( up_request_callback )
-		try{ j(spinner).show() } catch(e){}
-		node.parentNode.appendChild( spinner )
-	}
-	function up_request_callback( id ){
-		j.ajax({
-					url: '/ajax/up',
-					data:{definition_id:up}, // FIXME ugly parameter reference
-					
-					success: function(data) {
-							j('[name="madd-spinner"]').hide()
-						  flash_notice('Obrigado por Votar');
-							j('#def'+up+'>.feedbackb>.up').addClass('selected')
-							j('[name="madd-spinner"]').hide()
-						},
-					error: function(a,b,c){
-							flash_notice('Ops.. Voto Repetido ou Muitos votos seguidos');
-							j('[name="madd-spinner"]').hide()
-						}
-					})
-	}
-	
-	//			* FLAG *
-	
-	function flag_request( id, node ){
-		flag = id
-		load_and_run( flag_request_callback )
-		try{ j(spinner).show() } catch(e){}
-		node.parentNode.appendChild( spinner )
-	}
-	function flag_request_callback( id){
-		if (user_id) {
-			wait_modal_and_run("flagmsg")
-		}
-		else {
-			flash_notice( "Ops.. você não está logado ou seu passe expirou, por favor faça Login ↗" )
-			j('html,body').animate({ scrollTop: 0 })
-		}
-		setTimeout( "j('[name=\"madd-spinner\"]').hide()", 300)
-	}
-	function send_flag_proxy(elem){
-		var pai = j(elem).parents('div')
-		var pre = pai.find('input:radio:checked.pre')
-		var obs = false
-		
-		// A default complaint?
-		if( pre.size() == 1 ){
-			obs = pre.val();
-		}
-  	else {
-			var custom = pai.find('input:radio:checked.custom')
-  		if ( custom.size() == 1 ) {
-				obs = custom.next().val()
-			}
-  	}
-		if(typeof(obs) == 'string' && obs.length < 1){
-			flash_error('É necessária uma justificativa')
-		}else{
-			flag_request_send(obs)
-		}
-		j.closeDOMWindow()
-	}
-	function flag_request_send(obs){
-		//var obs = prompt('Por favor um breve comentário sobre o motivo da sinalização (spam, erro, ..)') 
-		if(obs){
-			j.ajax({
-				url: '/ajax/flag',
-				data: {
-					definition_id: flag,
-					obs: obs
-				}, // FIXME ugly parameter reference
-				success: function(data){
-					j('[name="madd-spinner"]').hide()
-					flash_notice('Obrigado por Votar');
-					j('#def' + flag + '>.feedbackb>.report').addClass('selected')
-					j('[name="madd-spinner"]').hide()
-				},
-				error: function(a, b, c){
-					flash_notice('Ops.. Voto Repetido ou Muitos votos seguidos');
-					j('[name="madd-spinner"]').hide()
-				}
-			})
-		}
-	}
-	
-	
-	//			* ADD DEF *
-	
-	
-	function prepare_add(elem){
-		elem.attributes.onclick.value = ''
-		load_and_run( prepare_add_done )
-		try{ j(spinner).show() } catch(e){}
-		elem.parentNode.appendChild( spinner )
-	}
-	// FIXME Do primeiro click em diante ele buga e não aparece nada 
-	function prepare_add_done(){
-		if( user_id ){
-			j('#madd').slideUp( '', function(){ 
-							j('#addf').slideDown( '', function(){
-										j('html,body').animate({
-											 		scrollTop: $('#footer').offset().top }) } ) })
-		}else{
-			flash_notice( "Ops.. você não está logado ou seu passe expirou, por favor faça Login ↗" )
-			j('html,body').animate({ scrollTop: 0 })
-		}
-		j('[name="madd-spinner"]').hide()
-	}
-	
-	
-	
-	//			* VISUAL *
-	
-	// Never use directly
-	function flash_notice( msg ){
-		//Assumes jQuery is present
-		j('#notib').html( msg ).fadeIn()
-		setTimeout( "j('#notib').fadeOut()", 5000 )
-	}
-	
-	// Never use directly
-	function flash_error( msg ){
-		//Assumes jQuery is present
-		j('#errob').html( msg ).fadeIn()
-		setTimeout( "j('#errob').fadeOut()", 5000 )
-	}
-	
-	// Never use directly
-	function wait_modal_and_run( id_div ){
-		if( typeof(j) != 'undefined' && typeof( j('body').openDOMWindow ) != 'undefined' && j('#'+id_div+":hidden").size() > 0 ){
-			j('#'+id_div).openDOMWindow({ eventType:'click' })
-    	j.openDOMWindow({ 
-        windowSourceID:'#'+id_div,
-				height:350,
-				width:500
-			})
-		}else{
-			//this trick is needed because the callback from the modal is not usable
-			setTimeout("wait_modal_and_run( '"+id_div+"' )", 200)
-		}
-	}
-	
-	
-	
-	//			* BASE *
-	 
-	function load_and_run( callback, arg ){
-		if( typeof($) == 'function' ){
-			// This means jQuery is loaded
-			callback( (typeof( arg ) != 'undefined' ? arg : true))
-		}else{
-			LazyLoad.js('/javascripts/jquery-1.4.2.js', function(arg){
-				j=$;
-				LazyLoad.js('/javascripts/jquery.DOMWindow.js');
-				callback( (typeof( arg ) != 'undefined' ? arg : true) );
-			}, arg)
-			
-		}
-	}
-	
-</script>
+<%= javascript_include_tag 'application.js' %>
 <!--% flash[:notice] = "thiwas" %-->

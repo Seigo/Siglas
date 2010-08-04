@@ -2,17 +2,17 @@
 
 <table>
   <tr>
-    <th>Definition id</th>
     <th>Definition</th>
-    <th>User</th>
-    <th>Obs</th>
+    <th>Snitch -&gt;</th>
+		<th>Tells -&gt;</th>
+    <th>Criminal?</th>
   </tr>
   <% for flag in @flags %>
     <tr>
-      <td><%=h flag.definition_id %></td>
-      <td><%=h flag.get_definition %></td>
-      <td><%=h flag.user_id %></td>
+      <td><%= link_to flag.definition.definition, url_def(flag.definition.sigla.sigla) %></td>
+      <td class="green"><%=h flag.user.name %></td>
       <td><%=h flag.obs %></td>
+			<td class="red"><%=h flag.definition.user.name %></td>
       <td><%= link_to "Show", flag %></td>
       <td><%= link_to "Edit", edit_flag_path(flag) %></td>
       <td><%= link_to "Destroy", flag, :confirm => 'Are you sure?', :method => :delete %></td>

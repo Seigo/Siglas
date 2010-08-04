@@ -62,7 +62,7 @@
 		<%= image_tag 'dhand.png', :class => 'selected' %> <%= @user.flags.count %> <br />
 				
 		<% @user.flags.each do |user_flags| %>
-  		<%= user_flags.get_definition %> <br />
+  		<%= user_flags.definition.definition %> <br />
       <%= user_flags.obs %> <br />
     <% end %>
 	</div>
