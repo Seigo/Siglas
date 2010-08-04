@@ -216,7 +216,7 @@ h3{
 				vertical-align: middle;
 				border-bottom: dotted 1px #9f8ecb;
 				*/
-				background-color:#FFEFC6;
+				background-color:#ffefc6;
 				border-bottom:1px dotted #9F8ECB;
 				margin:0 0 20px 10px;
 				padding:5px 0 0 5px;
@@ -255,6 +255,12 @@ h3{
 					vertical-align: middle;
 					width: 18%;
 				}
+					
+					.count{
+						font-size: 80%;
+						collor: #636363;
+					}
+					
 					.selected{
 						border: 3px solid #3333CC;
 						
@@ -345,6 +351,3 @@ h3{
 			text-align: center;
 		}
 		
-		
-		
-	

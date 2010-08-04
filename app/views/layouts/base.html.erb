@@ -67,7 +67,9 @@
 			<div id="chb">
 				<div>
 					<div id="logoc">
-						<h1 class="logo">GASA</h1>
+						<% unless controller.action_name == 'index' %>
+							<h1 class="logo">GASA</h1>
+						<% end %>
 					</div>
 					<div id="titlec">
 						<h2> <%= @title or "#Undefined" %> </h2>
