@@ -1,6 +1,7 @@
 class RegisterController < ApplicationController
   layout 'base'
   skip_filter :authenticate
+  skip_filter :authenticate_admin
   
   def index
     @user = User.new
@@ -10,7 +11,7 @@ class RegisterController < ApplicationController
   
   def register
     @user = User.new(params[:user])
-    if @user.save
+    if verify_recaptcha(:model => @user, :message => "Oh! It's error with reCAPTCHA!") and @user.save
       @title = "Sucesso!"
       session[:user] = @user.to_session_hash
       flash[:notice] = "Thanks for registering! You are now logged in #{session[:user][:name]}."
@@ -21,16 +22,4 @@ class RegisterController < ApplicationController
       render :action => 'index'
     end
   end
-  
-#  def validate                    
-#    if params[:name] && params[:email] && params[:password] && params[:password_confirmation]
-#      if params[:email] =~ /\w+@\w+/ && params[:password] == params[:password_confirmation]
-#        #ok.. save new User
-#        
-#      end
-#    else
-#      flash[]
-#      text << "All wrong!!"
-#    end
-#  end
 end

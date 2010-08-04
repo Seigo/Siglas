@@ -1,6 +1,7 @@
 class LoginController < ApplicationController
   layout 'base'
   skip_filter :authenticate
+  skip_filter :authenticate_admin
   
   before_filter :already_logged, :except => :logout
   

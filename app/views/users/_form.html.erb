@@ -31,5 +31,10 @@
     <%= f.password_field :password_confirmation %> <%= field_hint 'Repita aqui sua senha'%>
   </p>
   <br/>
+  <p>
+    <%= f.label "ReCaptcha:"%>
+    <%= recaptcha_tags %>
+  </p>
+  <br />
   <p><%= f.submit 'Salvar' %></p>
 <% end %>

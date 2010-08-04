@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
   
   before_filter :authenticate
+  before_filter :authenticate_admin
   
   def authenticate
     unless session[:user]
@@ -22,4 +23,9 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def authenticate_admin
+    unless session[:user].email == "guilhermeosawa@gmail.com" or session[:user].email == "fabianosoriani@gmail.com"
+      flash[:auth_needed] = "<span id='flash'>Access denied.</span>"
+      redirect_to root_url
+  end
 end

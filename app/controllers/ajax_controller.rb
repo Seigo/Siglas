@@ -1,5 +1,6 @@
 class AjaxController < ApplicationController
   skip_filter :authenticate, :except => :flag
+  skip_filter :authenticate_admin
   
   def up
     #flash[:notice] = "remote_ip: #{request.remote_ip} fim"

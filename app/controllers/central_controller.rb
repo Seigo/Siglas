@@ -1,6 +1,7 @@
 class CentralController < ApplicationController
   layout 'base'
   skip_filter :authenticate, :except => [:add_definition, :profile, :edit_profile, :delete_profile]
+  skip_filter :authenticate_admin
   
   def index
     @new_siglas = Sigla.all( :order => "created_at DESC", :limit => 100 )
@@ -17,6 +18,8 @@ class CentralController < ApplicationController
       params[:sigla] = params[:sigla].upcase
       @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
       
+      @sigla.definitions.sort! {|x,y| y.ups.count <=> x.ups.count }
+      
       @title = params[:sigla]
       if( @sigla )
         @moto = ( @template.pluralize(@sigla.definitions.size, 'resultados' )  )
@@ -32,18 +35,11 @@ class CentralController < ApplicationController
     params[:sigla] = params[:sigla].upcase
     @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
-    if @sigla # Definition(s) exist, create a new
-      @def = @sigla.definitions.new( :definition => params[:new_definer],
+    @sigla = Sigla.create(:sigla => params[:sigla]) unless @sigla
+    
+    @def = @sigla.definitions.new( :definition => params[:new_definer],
                               :language => params[:definition_language],
                               :creator_id => session[:user][:id])
-                              
-    else # No definitions exist, start with a new # new entry on Siglas table
-      @sigla = Sigla.create(:sigla => params[:sigla])
-      @def = @sigla.definitions.new( :definition => params[:new_definer],
-                              :language => params[:definition_language],
-                              :creator_id => session[:user][:id])
-
-    end
     
     if @def.save
       flash[:notice] = "Sucesso! Definição adicionada para #{@sigla.sigla}"
@@ -58,8 +54,6 @@ class CentralController < ApplicationController
     @siglas = []
     @user.definitions.each{ |d| @siglas.push(d.sigla) }
     @siglas.uniq!
-    
-    
     
     @title = @user.name
     @moto = "Usuário desde #{ @user.created_at.to_date.to_s_br }"

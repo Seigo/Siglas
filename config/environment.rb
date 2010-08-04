@@ -4,6 +4,9 @@
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
+ENV['RECAPTCHA_PUBLIC_KEY']  = '6LdCEbwSAAAAANDpsbHKx8Ljz1zwWkvR04aKJ5L2'
+ENV['RECAPTCHA_PRIVATE_KEY'] = '6LdCEbwSAAAAADzK3nEPF46CCTbFM-OAUZyv6hmy'
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.5' #unless defined? RAILS_GEM_VERSION
 
