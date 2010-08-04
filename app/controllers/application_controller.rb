@@ -27,5 +27,6 @@ class ApplicationController < ActionController::Base
     unless session[:user].email == "guilhermeosawa@gmail.com" or session[:user].email == "fabianosoriani@gmail.com"
       flash[:auth_needed] = "<span id='flash'>Access denied.</span>"
       redirect_to root_url
+    end
   end
 end
