@@ -16,9 +16,11 @@ class CentralController < ApplicationController
       redirect_to root_url
     else
       params[:sigla] = params[:sigla].upcase
+      params[:sigla].strip
+      
       @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
       
-      @sigla.definitions.sort! {|x,y| y.ups.count <=> x.ups.count }
+      @sigla.definitions.sort! {|x,y| y.ups.count <=> x.ups.count } if @sigla
       
       @title = params[:sigla]
       if( @sigla )
@@ -33,18 +35,25 @@ class CentralController < ApplicationController
   
   def add_definition
     params[:sigla] = params[:sigla].upcase
+    params[:sigla].strip
+    
     @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
     @sigla = Sigla.create(:sigla => params[:sigla]) unless @sigla
     
-    @def = @sigla.definitions.new( :definition => params[:new_definer],
-                              :language => params[:definition_language],
-                              :creator_id => session[:user][:id])
-    
-    if @def.save
-      flash[:notice] = "Sucesso! Definição adicionada para #{@sigla.sigla}"
+    params[:new_definer].strip
+    if LanguageList.read.include?(params[:definition_language])
+      @def = @sigla.definitions.new( :definition => params[:new_definer],
+                                :language => params[:definition_language],
+                                :creator_id => session[:user][:id])
+      
+      if @def.save
+        flash[:notice] = "Sucesso! Definição adicionada para #{@sigla.sigla}"
+      else
+        flash[:error] = "Erro! Todos os campos foram preenchidos?"
+      end
     else
-      flash[:error] = "Erro! Todos os campos foram preenchidos?"
+      flash[:notice] = "Nasty boy! We don't know this language."
     end
     redirect_to :action => 'definition', :sigla => params[:sigla]
   end
@@ -63,11 +72,11 @@ class CentralController < ApplicationController
     @u = params[:user]
     @user = User.find session[:user][:id]
     
-    if @user
+    if @user and CountryList.read.include?(@u[:country]) and LanguageList.read.include?(@u[:language])
       @user.name = @u[:name]
       @user.email = @u[:email]
       @user.country = @u[:country]
-      @user.state = @u[:state]
+      #@user.state = @u[:state]
       @user.language = @u[:language]
       @user.password = @u[:password]
       @user.password_confirmation = @u[:password_confirmation]
@@ -78,7 +87,7 @@ class CentralController < ApplicationController
         flash[:error] = "Não foi possível editar.."
       end
     else
-      flash[:notice] = "User is nil"
+      flash[:notice] = "User is nil, or we don't know the Country or Language you gave"
     end
     
     redirect_to :action => 'profile', :id => @user.id

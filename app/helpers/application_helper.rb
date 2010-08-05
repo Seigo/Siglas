@@ -17,6 +17,7 @@ module ApplicationHelper
   def url_def( str )
     #TODO pegar a lingua do user para montar URL na lingua
     "/definicao/#{str}"
+    "/definicao/#{ CGI.escape(str) }"
   end
   
   def url_user( id, name )
