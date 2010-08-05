@@ -60,11 +60,11 @@
 	</div>
 	
 	
-	<h3 style="margin-left: 0px;" >Apagar conta:</h3>
+	<h3 style="margin-left: 0px;" >Apagar cadastro:</h3>
 	<div style="border-left:1px solid #D3E1F9;margin-left:0;margin-top:-25px;padding-left:20px;">
-        
+  Para apagar seu histórico de feedback e seu cadastro conosco click no botão abaixo. </br>
     <% form_tag '/central/delete_profile' do %>
-        <button type="submit" >APAGAR</button>
+        <button onclick="if (confirm('Deseja desativar sua conta?')) {return true;};return false;" type="submit" >APAGAR</button>
     <% end %>
   </div>
 	
