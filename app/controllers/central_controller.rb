@@ -59,13 +59,20 @@ class CentralController < ApplicationController
   end
   
   def profile
-    @user = User.find session[:user][:id]
+    @user = User.find  params[:id]#session[:user][:id]
     @siglas = []
     @user.definitions.each{ |d| @siglas.push(d.sigla) }
     @siglas.uniq!
     
     @title = @user.name
     @moto = "Usuário desde #{ @user.created_at.to_date.to_s_br }"
+  end
+  
+  def config
+    @user = User.find session[:user][:id]
+    
+    @title = @user.name
+    @moto = "Ultima alteração em #{ @user.updated_at.to_date.to_s_br }"
   end
   
   def edit_profile
@@ -78,8 +85,8 @@ class CentralController < ApplicationController
       @user.country = @u[:country]
       #@user.state = @u[:state]
       @user.language = @u[:language]
-      @user.password = @u[:password]
-      @user.password_confirmation = @u[:password_confirmation]
+      #@user.password = @u[:password]
+      #@user.password_confirmation = @u[:password_confirmation]
       
       if @user.save
         flash[:notice] = "Editado com sucesso!"
@@ -90,7 +97,27 @@ class CentralController < ApplicationController
       flash[:notice] = "User is nil, or we don't know the Country or Language you gave"
     end
     
-    redirect_to :action => 'profile', :id => @user.id
+    redirect_to :action => 'config'
+  end
+  
+  def edit_password
+    @u = params[:user]
+    @user = User.find session[:user][:id]
+    
+    if @user
+      @user.password = @u[:password]
+      @user.password_confirmation = @u[:password_confirmation]
+      
+      if @user.save
+        flash[:notice] = "Seu password foi alterado com sucesso!"
+      else
+        flash[:error] = "Não foi possível alterar.."
+      end
+    else
+      flash[:notice] = "User is nil"
+    end
+    
+    redirect_to :action => 'config'
   end
   
   def delete_profile

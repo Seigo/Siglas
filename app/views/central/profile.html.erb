@@ -1,78 +1,30 @@
+<% @picture_title = gravatar_url_for(@user.email) %>
 <div style="margin-left: 5px">
-  <h3 style="margin-left: 0px;" >Dados de sua conta:</h3>
-  <div style="margin-left: 0px; border-left:1px solid #D3E1F9; padding-left: -12px; margin-top:-25px;">
-    <%= @user.name %> <br />
-    <%= @user.email %> <br />
-    <% CountryList.read.each do |c| %>
-      <% if c[0] == @user.country %>
-        <%= c[1] %> <br />
-      <% end %>
-    <% end %>
-    <%= @user.language %> <br />
-  </div>
+<!--
   
-  <h3 style="margin-left: 0px;" >Editar conta:</h3>
-  <div style="margin-left: 0px; border-left:1px solid #D3E1F9; padding-left: -12px; margin-top:-25px;">
-    <% form_for @user, :url => { :controller => 'central', :action => 'edit_profile' } do |f| %>
-      <%= f.error_messages %>
-      <p>
-        <%= f.label :name, "Nome" %><br />
-        <%= f.text_field :name %> <%= field_hint 'ex: Fabiano P Soriani'%>
-      </p>
-      <p>
-        <%= f.label :email, "E-Mail" %><br />
-        <%= f.text_field :email %> <%= field_hint 'Este e-mail será usado para confirmação'%>
-      </p>
-      <br/>
-      <p>
-        <%= f.label :country, "País" %><br />
-        <%= f.select :country, CountryList.read.collect {|p| [ p[1], p[0] ] } %> <%= field_hint 'País de residência'%>
-      </p>
-      <p>
-        <%= f.label :language, "Idioma" %><br />
-        <%= f.select :language, LanguageList.read.collect {|p| [ p[0], p[1] ] } %> <%= field_hint 'Seu indioma de preferência'%>
-      </p>
-      <br/>
-      <p>
-        <%= f.label :password, "Senha" %><br />
-        <%= f.password_field :password %> <%= field_hint 'Deve ter mais de 4 dígitos !'%>
-      </p>
-      <p>
-        <%= f.label :password_confirmation, "Confirmação de Senha" %><br />
-        <%= f.password_field :password_confirmation %> <%= field_hint 'Repita aqui sua senha'%>
-      </p>
-      <br/>
-      <p><%= f.submit 'Salvar' %></p>
-    <% end %>
-
-  </div>
-  
+  -->
 	<h3 style="margin-left: 0px;" >Definições:</h3>
 	<div style="margin-left: 0px; border-left:1px solid #D3E1F9; padding-left: -12px; margin-top:-25px;">
 		<ul style="list-style:circle">
+		<% if @siglas.empty? %>
+			 <li> Por enquanto nenhuma </li>
+		<% end %>
 		<% @siglas.each do |sigla| %>
 			 <li><%= link_to sigla.sigla, url_def( sigla.sigla) %></li>
 		<% end %>
 		</ul>
 	</div>
 	
-	<h3 style="margin-left: 0px;" >Votos:</h3>
+	<h3 style="margin-left: 0px;" >Colaboração de Feedback:</h3>
 	<div style="border-left:1px solid #D3E1F9;margin-left:0;margin-top:-25px;padding-left:20px;">
 		<%= image_tag 'uhand.png', :class => 'selected' %> <%= @user.ups.count %> <br />
-		<%= image_tag 'dhand.png', :class => 'selected' %> <%= @user.flags.count %> <br />
-				
+		<%= image_tag 'flag.png', :class => 'selected' %> <%= @user.flags.count %> <br />
+		<!--		
 		<% @user.flags.each do |user_flags| %>
   		<%= user_flags.definition.definition %> <br />
       <%= user_flags.obs %> <br />
     <% end %>
+		-->
 	</div>
 	
-	<h3 style="margin-left: 0px;" >Apagar conta:</h3>
-	<div style="border-left:1px solid #D3E1F9;margin-left:0;margin-top:-25px;padding-left:20px;">
-        
-    <% form_tag '/central/delete_profile' do %>
-        <button type="submit" >APAGAR</button>
-    <% end %>
-  </div>
-
 </div>

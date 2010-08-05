@@ -33,7 +33,7 @@
   <br/>
   <p>
     <%= f.label "ReCaptcha:"%>
-    <%= recaptcha_tags %>
+    <%= recaptcha_tags( :display => {:theme => 'clean'} )%>
   </p>
   <br />
   <p><%= f.submit 'Salvar' %></p>

@@ -12,7 +12,7 @@ class RegisterController < ApplicationController
   def register
     @user = User.new(params[:user])
     if CountryList.read.include?(@user.country) and LanguageList.read.include?(@user.language)
-      if verify_recaptcha(:model => @user, :message => "Oh! It's error with reCAPTCHA!") and @user.save
+      if verify_recaptcha(:model => @user, :message => "Erro de reCAPTCHA! Você tem certeza que você não é um robo?") and @user.save
         @title = "Sucesso!"
         session[:user] = @user.to_session_hash
         flash[:notice] = "Thanks for registering! You are now logged in #{session[:user][:name]}."
