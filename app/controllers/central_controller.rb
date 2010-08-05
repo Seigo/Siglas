@@ -50,13 +50,20 @@ class CentralController < ApplicationController
   end
   
   def profile
-    @user = User.find session[:user][:id]
+    @user = User.find  params[:id]#session[:user][:id]
     @siglas = []
     @user.definitions.each{ |d| @siglas.push(d.sigla) }
     @siglas.uniq!
     
     @title = @user.name
     @moto = "Usuário desde #{ @user.created_at.to_date.to_s_br }"
+  end
+  
+  def config
+    @user = User.find session[:user][:id]
+    
+    @title = @user.name
+    @moto = "Ultima alteração em #{ @user.updated_at.to_date.to_s_br }"
   end
   
   def edit_profile
@@ -81,6 +88,10 @@ class CentralController < ApplicationController
     end
     
     redirect_to :action => 'profile', :id => @user.id
+  end
+  
+  def edit_password
+    
   end
   
   def delete_profile
