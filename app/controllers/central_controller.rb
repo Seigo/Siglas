@@ -76,8 +76,8 @@ class CentralController < ApplicationController
       @user.country = @u[:country]
       @user.state = @u[:state]
       @user.language = @u[:language]
-      @user.password = @u[:password]
-      @user.password_confirmation = @u[:password_confirmation]
+      #@user.password = @u[:password]
+      #@user.password_confirmation = @u[:password_confirmation]
       
       if @user.save
         flash[:notice] = "Editado com sucesso!"
@@ -88,11 +88,27 @@ class CentralController < ApplicationController
       flash[:notice] = "User is nil"
     end
     
-    redirect_to :action => 'profile', :id => @user.id
+    redirect_to :action => 'config'
   end
   
   def edit_password
+    @u = params[:user]
+    @user = User.find session[:user][:id]
     
+    if @user
+      @user.password = @u[:password]
+      @user.password_confirmation = @u[:password_confirmation]
+      
+      if @user.save
+        flash[:notice] = "Seu password foi alterado com sucesso!"
+      else
+        flash[:error] = "Não foi possível alterar.."
+      end
+    else
+      flash[:notice] = "User is nil"
+    end
+    
+    redirect_to :action => 'config'
   end
   
   def delete_profile
