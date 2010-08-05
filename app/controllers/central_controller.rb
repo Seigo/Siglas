@@ -67,6 +67,7 @@ class CentralController < ApplicationController
   end
   
   def edit_profile
+    @u = params[:user]
     @user = User.find session[:user][:id]
     
     if @user
