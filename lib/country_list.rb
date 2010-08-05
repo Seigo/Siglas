@@ -267,4 +267,14 @@ j(f1).each(function(i,e){
   def self.read()
     return @@list
   end
+  
+  def self.include_second_param?(str)
+    raise('Country second param is not a String') unless str.is_a? String
+    
+    @@list.each do |l|
+      return true if l[1] == str
+    end
+    
+    return false
+  end
 end

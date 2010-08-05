@@ -39,21 +39,25 @@ class CentralController < ApplicationController
     
     @sigla = Sigla.find(:first, :conditions => {:sigla => params[:sigla]})
     
-    @sigla = Sigla.create(:sigla => params[:sigla]) unless @sigla
-    
-    params[:new_definer].strip
-    if LanguageList.read.include?(params[:definition_language])
-      @def = @sigla.definitions.new( :definition => params[:new_definer],
-                                :language => params[:definition_language],
-                                :creator_id => session[:user][:id])
+    Sigla.transaction do
+      @sigla = Sigla.create(:sigla => params[:sigla]) unless @sigla
       
-      if @def.save
-        flash[:notice] = "Sucesso! Definição adicionada para #{@sigla.sigla}"
+      params[:new_definer].strip
+      if LanguageList.include_second_param?(params[:definition_language])
+        @def = @sigla.definitions.new( :definition => params[:new_definer],
+                                  :language => params[:definition_language],
+                                  :creator_id => session[:user][:id])
+        
+        if @def.save
+          flash[:notice] = "Sucesso! Definição adicionada para #{@sigla.sigla}"
+        else
+          flash[:error] = "Erro! Todos os campos foram preenchidos?"
+          raise ActiveRecord::Rollback
+        end
       else
-        flash[:error] = "Erro! Todos os campos foram preenchidos?"
+        flash[:notice] = "Nasty boy! We don't know this language."
+        raise ActiveRecord::Rollback
       end
-    else
-      flash[:notice] = "Nasty boy! We don't know this language."
     end
     redirect_to :action => 'definition', :sigla => params[:sigla]
   end
@@ -79,7 +83,7 @@ class CentralController < ApplicationController
     @u = params[:user]
     @user = User.find session[:user][:id]
     
-    if @user and CountryList.read.include?(@u[:country]) and LanguageList.read.include?(@u[:language])
+    if @user and CountryList.include_second_param?(@u[:country]) and LanguageList.include_second_param?(@u[:language])
       @user.name = @u[:name]
       @user.email = @u[:email]
       @user.country = @u[:country]

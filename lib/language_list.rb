@@ -168,4 +168,14 @@ class LanguageList
   def self.read
     @@list
   end
+  
+  def self.include_second_param?(str)
+    raise('Lang second param is not a String') unless str.is_a? String
+    
+    @@list.each do |l|
+      return true if l[1] == str
+    end
+    
+    return false
+  end
 end
