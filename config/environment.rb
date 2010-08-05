@@ -85,3 +85,6 @@ class Date
     self.strftime('%d/%m/%Y')
   end
 end
+
+# stop breaking my freaking layout!
+ActionView::Base.field_error_proc = Proc.new { |html_tag, instance| "<span class=\"fieldWithErrors\">#{html_tag}</span>" }
