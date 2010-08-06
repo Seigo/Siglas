@@ -41,4 +41,9 @@ class FlagsController < ApplicationController
     flash[:notice] = "Successfully destroyed flag."
     redirect_to flags_url
   end
+  
+  # AJAX
+
+ 
+ 
 end
