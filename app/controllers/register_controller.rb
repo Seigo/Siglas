@@ -12,18 +12,18 @@ class RegisterController < ApplicationController
   def register
     @user = User.new(params[:user])
     if CountryList.include_param?(@user.country) and LanguageList.include_second_param?(@user.language)
-      if @user.save and verify_recaptcha(:model => @user, :message => "Erro de reCAPTCHA! Você tem certeza que você não é um robô?")
+      if verify_recaptcha(:model => @user, :message => "Favor digite as letras que aparecem distorcidas para efetivar seu cadastro") && @user.save
         @title = "Sucesso!"
         session[:user] = @user.to_session_hash
-        flash[:notice] = "Thanks for registering! You are now logged in #{session[:user][:name]}."
+        flash[:notice] = "Cadastro efetivado! Você está logado."
         redirect_to root_url
       else
         @title = "Cadastro"
-        flash[:error] = "Conta não pode ser criada #{@user.to_session_hash[:user]}."
+        #flash[:error] = " #{@user.to_session_hash[:user]}."
         render :action => 'index'
       end
     else
-      flash[:notice] = "What? we don't know these country and language."
+      flash[:error] = ".!."
       redirect_to root_url
     end
   end
