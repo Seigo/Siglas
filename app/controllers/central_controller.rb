@@ -7,7 +7,7 @@ class CentralController < ApplicationController
     @new_siglas = Sigla.all( :order => "created_at DESC", :limit => 100 )
     
     #@title = "GASA" #img now
-    @moto = "Glosário de Abreviaturas Siglas e Acrônimos"
+    @moto = "Glossário de Abreviaturas Siglas e Acrônimos"
   end
   
   def definition # "Busca"
