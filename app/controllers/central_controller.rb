@@ -55,7 +55,7 @@ class CentralController < ApplicationController
           raise ActiveRecord::Rollback
         end
       else
-        flash[:notice] = "Nasty boy! We don't know this language."
+        flash[:notice] = "Não conhecemos a linguagem inserida."
         raise ActiveRecord::Rollback
       end
     end
@@ -83,7 +83,7 @@ class CentralController < ApplicationController
     @u = params[:user]
     @user = User.find session[:user][:id]
     
-    if @user and CountryList.include_second_param?(@u[:country]) and LanguageList.include_second_param?(@u[:language])
+    if @user and CountryList.include_param?(@u[:country]) and LanguageList.include_second_param?(@u[:language])
       @user.name = @u[:name]
       @user.email = @u[:email]
       @user.country = @u[:country]
@@ -94,14 +94,15 @@ class CentralController < ApplicationController
       
       if @user.save
         flash[:notice] = "Editado com sucesso!"
+        redirect_to :action => 'config'
       else
         flash[:error] = "Não foi possível editar.."
+        render :action => 'config'
       end
     else
-      flash[:notice] = "User is nil, or we don't know the Country or Language you gave"
+      flash[:notice] = "Você não está logado, ou inseriu país ou língua desconhecidos."
+      render :action => 'config'
     end
-    
-    redirect_to :action => 'config'
   end
   
   def edit_password
@@ -114,26 +115,26 @@ class CentralController < ApplicationController
       
       if @user.save
         flash[:notice] = "Seu password foi alterado com sucesso!"
+        redirect_to :action => 'config'
       else
         flash[:error] = "Não foi possível alterar.."
+        render :action => 'config'
       end
     else
-      flash[:notice] = "User is nil"
+      flash[:notice] = "Você não está logado."
+      render :action => 'config'
     end
-    
-    redirect_to :action => 'config'
   end
   
   def delete_profile
     @user = User.find session[:user][:id]
     
     if @user.destroy
-      flash[:notice] = "User account destroyed!"
+      session[:user] = nil
+      flash[:notice] = "Conta deletada!"
     else
-      flash[:error] = "Could not destroy user account!"
+      flash[:error] = "Conta não pode ser deletada!"
     end
-    
-    session[:user] = nil
     
     redirect_to root_url
   end
