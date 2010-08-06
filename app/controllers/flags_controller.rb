@@ -42,6 +42,26 @@ class FlagsController < ApplicationController
     redirect_to flags_url
   end
   
+  def ok
+    @flag = Flag.find(params[:id])
+    
+    if @flag.update_attribute(:accepted, true)
+      render :text => "Flag checked"
+    else
+      render :text => "Failed to check flag"
+    end
+  end
+  
+  def deny
+    @flag = Flag.find(params[:id])
+    
+    if @flag.update_attribute(:accepted, false)
+      render :text => "Flag ignored"
+    else
+      render :text => "Failed to ignore flag"
+    end
+  end
+  
   # AJAX
 
  
