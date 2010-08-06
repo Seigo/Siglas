@@ -268,11 +268,12 @@ j(f1).each(function(i,e){
     return @@list
   end
   
-  def self.include_second_param?(str)
-    raise('Country second param is not a String') unless str.is_a? String
+  def self.include_param?(num)
+    num = num.to_i
+    raise('Country param is not a Integer') unless num.is_a? Integer
     
     @@list.each do |l|
-      return true if l[1] == str
+      return true if l[0] == num
     end
     
     return false

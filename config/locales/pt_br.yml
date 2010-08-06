@@ -1,0 +1,17 @@
+pt_br:
+    errors: "Erro!"
+    activerecord:
+        attributes:
+            user:
+                name: "Nome"
+                email: "Endereço de email"
+                password: "Senha"
+        errors:
+            template:
+                body: "Por favor, corrija os campos assinalados"
+                header: "Dados inválidos"
+            messages:
+                blank: "é obrigatório"
+                taken: "já existe"
+                too_short: "é muito curto(a)"
+                invalid: "é inválido"
