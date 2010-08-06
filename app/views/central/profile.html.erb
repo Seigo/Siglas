@@ -1,4 +1,4 @@
-<% @picture_title = gravatar_url_for(@user.email) %>
+<% @picture_title = {:url => gravatar_url_for(@user.email), :opts => {:style => "vertical-align: middle; border: 1px dotted;", :title => "gravatar.com"} } %>
 <div style="margin-left: 5px">
 <!--
   

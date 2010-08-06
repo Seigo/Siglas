@@ -71,11 +71,11 @@
 				<div>
 					<div id="logoc">
 						<% unless controller.action_name == 'index' %>
-							<h1 class="logo">GASA</h1>
+							<h1 class="logo"><%= image_tag( 'gasa8-minib.png', { :style => "vertical-align: middle; ", :title => "GASA", :alt => "GASA"}  ) %></h1>
 						<% end %>
 					</div>
 					<div id="titlec">
-						<h2> <%= image_tag( @picture_title, :style => "vertical-align: middle; border: 1px dotted;", :title => "gravatar.com" ) if @picture_title %> <%= @title or "" %> </h2>
+						<h2> <%= image_tag( @picture_title[:url], @picture_title[:opts]  ) if @picture_title %> <%= @title or "" %> </h2>
 					</div>
 					
 					<!--%= link_to "Add Definition", :controller => "central", :action => "add_definition_for_sigla", :sigla => @sigla %-->

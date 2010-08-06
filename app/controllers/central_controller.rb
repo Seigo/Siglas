@@ -1,12 +1,12 @@
 class CentralController < ApplicationController
   layout 'base'
-  skip_filter :authenticate, :except => [:add_definition, :profile, :edit_profile, :delete_profile]
+  skip_filter :authenticate, :except => [:add_definition, :config, :edit_profile, :edit_password, :delete_profile]
   skip_filter :authenticate_admin
   
   def index
     @new_siglas = Sigla.all( :order => "created_at DESC", :limit => 100 )
     
-    @title = "GASA"
+    #@title = "GASA" #img now
     @moto = "Glosário de Abreviaturas Siglas e Acrônimos"
   end
   
@@ -24,7 +24,7 @@ class CentralController < ApplicationController
       
       @title = params[:sigla]
       if( @sigla )
-        @moto = ( @template.pluralize(@sigla.definitions.size, 'resultados' )  )
+        @moto = ( @template.pluralize(@sigla.definitions.size, 'resultado' )  )
       else
         @moto = " Trevas :("
       end
