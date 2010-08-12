@@ -1,5 +1,40 @@
 <% title "Flags" %>
 
+<script>
+	function accept_flag( id ){
+	j.ajax({
+		url: '/flags/ok/',
+		data:{id:id}, // FIXME ugly parameter reference
+		
+		success: function(data) {
+			j('#flag'+id+'').fadeOut('slow').hide()
+		  //flash_notice('Obrigado por Votar');
+			//j('#def'+up+'>.feedbackb>.up').addClass('selected')
+			},
+		error: function(a,b,c){
+			alert('algo falhou:'+a+b+c)
+			}
+		})
+	}
+	
+	function deny_flag( id ){
+	j.ajax({
+		url: '/flags/deny/',
+		data:{id:id}, // FIXME ugly parameter reference
+		
+		success: function(data) {
+				j('#flag'+id+'').fadeOut('slow').hide()
+			  //flash_notice('Obrigado por Votar');
+				//j('#def'+up+'>.feedbackb>.up').addClass('selected')
+			},
+		error: function(a,b,c){
+				alert('algo falhou:'+a+b+c)
+			}
+		})
+	}
+	
+</script>
+
 <table>
   <tr>
     <th>Definition</th>
@@ -10,17 +45,29 @@
 		<th></th>
   </tr>
   <% for flag in @flags %>
-    <tr style="background-color:<%= cycle('#e4d4fc', 'transparent')%> "> 
+    <tr id="flag<%=flag.id%>" style="background-color:<%= cycle('#e4d4fc', 'transparent')%> "> 
       <td><%= link_to flag.definition.sigla.sigla, url_def(flag.definition.sigla.sigla) %>: (<%=flag.definition.language[0,2]%>) <%= flag.definition.definition %> </td>
       <td style="color: #222;"><%= link_to '.', url_user(flag.user.id, 'snitch') %><%=h flag.user.name %></td>
       <td><em><%=h flag.obs %></em></td>
 			<td style="color: #222; "><%= link_to '.', url_user(flag.definition.user.id, 'criminal') %><%=h flag.definition.user.name %></td>
 			
-      <td><%= link_to image_tag('accept.gif')+"Ok", edit_flag_path(flag) %></td>
-			<td><%= link_to image_tag('deny.gif')+"Deny", flag %></td>
-      <!--td><%= link_to "Destroy", flag, :confirm => 'Are you sure?', :method => :delete %></td-->
+      <td><%= link_to image_tag('accept.gif')+"Ok", '#ok',   :onclick => "accept_flag(#{flag.id})" %></td>
+			<td><%= link_to image_tag('deny.gif')+"Deny", '#deny', :onclick => "deny_flag(  #{flag.id})" %></td>
+      <!--td>< %= link_to "Destroy", flag, :confirm => 'Are you sure?', :method => :delete % ></td-->
     </tr>
   <% end %>
+	<tr> <td>-=-=-=-</td> </tr>
+	<% for flag in @history %>
+    <tr id="flag<%=flag.id%>" style="background-color:<%= cycle('#d4fcfa', 'transparent')%> "> 
+      <td><%= link_to flag.definition.sigla.sigla, url_def(flag.definition.sigla.sigla) %>: (<%=flag.definition.language[0,2]%>) <%= flag.definition.definition %> </td>
+      <td style="color: #222;"><%= link_to '.', url_user(flag.user.id, 'snitch') %><%=h flag.user.name %></td>
+      <td><em><%=h flag.obs %></em></td>
+			<td style="color: #222; "><%= link_to '.', url_user(flag.definition.user.id, 'criminal') %><%=h flag.definition.user.name %></td>
+			<td colspan="2"><%= flag.accepted ? image_tag('accept.gif') : image_tag('deny.gif') %></td>
+      <!--td>< %= link_to "Destroy", flag, :confirm => 'Are you sure?', :method => :delete % ></td-->
+    </tr>
+  <% end %>
+	
 </table>
 
-<p><%= link_to "New Flag", new_flag_path %></p>
+

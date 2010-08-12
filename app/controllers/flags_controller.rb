@@ -1,6 +1,7 @@
 class FlagsController < ApplicationController
   def index
-    @flags = Flag.all
+    @flags = Flag.all(:conditions => {:accepted => nil})
+    @history = Flag.all(:conditions => ["accepted = ? or accepted = ?", true, false])
   end
   
   def show
