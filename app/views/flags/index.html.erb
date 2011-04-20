@@ -46,7 +46,13 @@
   </tr>
   <% for flag in @flags %>
     <tr id="flag<%=flag.id%>" style="background-color:<%= cycle('#e4d4fc', 'transparent')%> "> 
-      <td><%= link_to flag.definition.sigla.sigla, url_def(flag.definition.sigla.sigla) %>: (<%=flag.definition.language[0,2]%>) <%= flag.definition.definition %> </td>
+      <td>
+      	<% if flag && flag.definition && flag.definition.sigla %>
+      		<%= link_to flag.definition.sigla.try( :sigla), url_def(flag.definition.sigla.sigla) %>: (<%=flag.definition.language[0,2]%>) <%= flag.definition.definition %>
+				<% else %>
+				  'definição apagada.'
+			  <% end %>
+			</td>
       <td style="color: #222;"><%= link_to '.', url_user(flag.user.id, 'snitch') %><%=h flag.user.name %></td>
       <td><em><%=h flag.obs %></em></td>
 			<td style="color: #222; "><%= link_to '.', url_user(flag.definition.user.id, 'criminal') %><%=h flag.definition.user.name %></td>
