@@ -2,7 +2,7 @@
 <dl>
   <% @sigla.definitions.each do |d| %>
 		<dd>
-			<div id="def<%= d.id %>">
+			<div id="def<%= d.id %>" lang="<%= d.language %>">
 				<div class="definitionb">
 					<span> <span class="lang bigrounded"><%=h d.language[0,2].upcase %></span> <span class="def"><%=h d.definition %></span> </span>
 				</div>

@@ -1,0 +1,24 @@
+<% @picture_title = {:url => 'gasa8a.png', :opts => {:style => "vertical-align: middle; ", :title => "GASA", :alt => "GASA"} } %>
+
+<style type="text/css">
+	li{
+		padding-bottom: 7px
+	}
+</style>
+
+<h3>Índice Completo &gt; <%= params[:char] %></h3>
+
+<ul>
+<% @siglas.each do |sigla| %>
+	<li> <%= link_to sigla.sigla, url_def( sigla.sigla)  %> </li>
+<% end %>
+</ul>
+
+
+<br />
+<br />
+
+<!-- h3>Novas definições</h3>
+< @pop_defs.each do |d| % >
+	 <= d.sigla.sigla+" - "+d.definition % > <br />
+< end %-->

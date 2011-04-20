@@ -10,6 +10,33 @@ class CentralController < ApplicationController
     @moto = "Glossário de Abreviaturas Siglas e Acrônimos"
   end
   
+  # Uma lista completa de todas siglas iniciadas por :char
+  def list
+    # caso onde recebo um caracter para buscar
+    if params[:char].size == 1
+      @siglas = Sigla.all( :conditions => ["sigla like ?", params[:char]+"%" ], 
+            :order => "created_at DESC" )
+    # caso particular para buscar números
+    elsif params[:char] == "0-9"
+      busca_arr = []
+      (0..9).each do |num|
+        busca_arr << "sigla like '#{num}%'"
+      end
+      @siglas = Sigla.all( :conditions => busca_arr.join(' OR '), 
+            :order => "created_at DESC" )  
+    end
+                
+                
+    if @siglas.size < 1
+      @moto = "Não temos definições com esse caracter :/"
+    elsif @siglas.size == 1
+      @moto = "1 única definição encontrada"
+    else
+      @moto = "#{@siglas.size} definições encontradas"
+    end
+ 
+  end
+  
   def definition # "Busca"
     if params[:sigla] == ""
       #flash[:notice] = "Campo de busca vazio."

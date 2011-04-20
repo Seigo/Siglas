@@ -1,15 +1,21 @@
 <% @picture_title = {:url => 'gasa8a.png', :opts => {:style => "vertical-align: middle; ", :title => "GASA", :alt => "GASA"} } %>
 
 <style type="text/css">
-	.link{
+	/*.link{
 		display: inline-block;
 		margin-right: 10px;
-	}
+	} */
 </style>
+
+<h3>Índice Completo</h3>
+<% ("A".."Z").each do |letra| %>
+	<span><%= link_to letra, list_url(:char => letra) %></span> &nbsp;&nbsp;
+<% end %>
+	<span><%= link_to "0-9", list_url(:char => '0-9') %></span> &nbsp;&nbsp;
 
 <h3>Novas Siglas definidas</h3>
 <% @new_siglas.each do |sigla| %>
-	<div class="link"> <%= link_to sigla.sigla, url_def( sigla.sigla)  %> </div>
+	<span> <%= link_to sigla.sigla, url_def( sigla.sigla)  %> </span> &nbsp;&nbsp;
 <% end %>
 
 <br />

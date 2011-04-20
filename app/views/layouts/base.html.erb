@@ -72,7 +72,9 @@
 				<div>
 					<div id="logoc">
 						<% unless controller.action_name == 'index' %>
-							<h1 class="logo"><%= image_tag( 'gasa8-minib.png', { :style => "vertical-align: middle; ", :title => "GASA", :alt => "GASA"}  ) %></h1>
+							<h1 class="logo">
+								<%= link_to image_tag( 'gasa8-minib.png', { :style => "vertical-align: middle; ", :title => "GASA", :alt => "GASA mini logo"}  ), "/", {:title => "Retornar a HOME"} %>
+						  </h1>
 						<% end %>
 					</div>
 					<div id="titlec">
@@ -112,6 +114,7 @@
 				<div id="sl">
 					<% form_tag '/definition', :method => 'GET' do %>
 						<div id="sb">
+							  <b>PESQUISAR:</b>
 								<%= text_field_tag :sigla %> <button type="submit">Busca</button>
 						</div>
 					<% end %>

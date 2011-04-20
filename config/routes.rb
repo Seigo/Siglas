@@ -52,6 +52,8 @@ ActionController::Routing::Routes.draw do |map|
   map.definition '/definition/:sigla', :controller => 'central', :action => 'definition'
   map.definicao '/definicao/:sigla', :controller => 'central', :action => 'definition'
   
+  map.list '/list/:char', :controller => 'central', :action => 'list'
+  
   map.profile '/profile/:id/:nome', :controller => 'central', :action => 'profile'
   map.perfil '/perfil/:id/:nome', :controller => 'central', :action => 'profile'
   
